@@ -1,428 +1,649 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>SIMILYA – Santé • Beauté • Bien-être</title>
+<title>SIMILYA – Santé • Beauté • Bien-être</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #faf9f6;
+    color: #222;
+}
+
+/* HEADER */
+header {
+    background: #ffffff;
+    text-align: center;
+    padding: 28px 15px 25px;
+    border-bottom: 1px solid #eeeeee;
+}
+
+.logo {
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: 5px;
+    margin: 0;
+}
+
+.tagline {
+    margin: 8px 0 0;
+    font-size: 12px;
+    letter-spacing: 3px;
+    color: #777;
+}
+
+/* HERO */
+.hero {
+    text-align: center;
+    padding: 55px 20px 35px;
+}
+
+.hero h1 {
+    margin: 0 0 15px;
+    font-size: 34px;
+    font-weight: 600;
+}
+
+.hero p {
+    margin: 0 auto;
+    max-width: 700px;
+    color: #666;
+    font-size: 16px;
+    line-height: 1.7;
+}
+
+/* PRODUCTS */
+.products {
+    max-width: 1250px;
+    margin: auto;
+    padding: 25px 20px 60px;
+
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px;
+}
+
+/* PRODUCT CARD */
+.product {
+    background: #ffffff;
+    border: 1px solid #eeeeee;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.product:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 28px rgba(0,0,0,0.09);
+}
+
+/* PRODUCT IMAGE */
+.product-image {
+    width: 100%;
+    height: 270px;
+    background: #f1f0ed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* PRODUCT INFO */
+.product-info {
+    padding: 20px;
+}
+
+.category {
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    color: #999;
+    text-transform: uppercase;
+    margin-bottom: 9px;
+}
+
+.product h2 {
+    margin: 0 0 12px;
+    font-size: 20px;
+    line-height: 1.35;
+    font-weight: 600;
+}
+
+.description {
+    min-height: 68px;
+    color: #666;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.price {
+    margin-top: 18px;
+    font-size: 21px;
+    font-weight: 700;
+    color: #222;
+}
+
+.order {
+    display: block;
+    margin-top: 15px;
+    padding: 13px 15px;
+    background: #222;
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    transition: background 0.2s ease;
+}
+
+.order:hover {
+    background: #444;
+}
+
+/* INSTAGRAM */
+.instagram-section {
+    background: white;
+    text-align: center;
+    padding: 45px 20px;
+    border-top: 1px solid #eeeeee;
+}
+
+.instagram-section h2 {
+    margin: 0 0 12px;
+    font-size: 24px;
+}
+
+.instagram-section p {
+    color: #777;
+    margin-bottom: 20px;
+}
+
+.instagram {
+    display: inline-block;
+    padding: 12px 25px;
+    background: #222;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 600;
+}
+
+/* FOOTER */
+footer {
+    background: #ffffff;
+    border-top: 1px solid #eeeeee;
+    text-align: center;
+    padding: 30px 15px;
+    color: #777;
+    font-size: 13px;
+}
+
+footer p {
+    margin: 7px 0;
+}
+
+/* MOBILE */
+@media (max-width: 1000px) {
+    .products {
+        grid-template-columns: repeat(2, 1fr);
     }
+}
 
-    body {
-      font-family: Arial, sans-serif;
-      background: #faf9f7;
-      color: #222;
-      line-height: 1.6;
-    }
-
-    header {
-      background: white;
-      text-align: center;
-      padding: 35px 20px;
-      border-bottom: 1px solid #eee;
-    }
+@media (max-width: 600px) {
 
     .logo {
-      font-size: 38px;
-      font-weight: 700;
-      letter-spacing: 5px;
-      color: #222;
-    }
-
-    .tagline {
-      margin-top: 8px;
-      color: #777;
-      font-size: 14px;
-      letter-spacing: 2px;
+        font-size: 27px;
     }
 
     .hero {
-      text-align: center;
-      padding: 45px 20px 30px;
+        padding: 40px 18px 25px;
     }
 
     .hero h1 {
-      font-size: 32px;
-      margin-bottom: 10px;
+        font-size: 27px;
     }
 
     .hero p {
-      color: #777;
-      max-width: 650px;
-      margin: auto;
+        font-size: 14px;
     }
 
     .products {
-      max-width: 1200px;
-      margin: 20px auto 60px;
-      padding: 0 20px;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 25px;
-    }
-
-    .product {
-      background: white;
-      border: 1px solid #eee;
-      border-radius: 16px;
-      overflow: hidden;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.06);
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-
-    .product:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 10px 28px rgba(0,0,0,0.10);
+        grid-template-columns: 1fr;
+        padding: 20px 15px 45px;
+        gap: 20px;
     }
 
     .product-image {
-      height: 300px;
-      background: #f5f3f0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
+        height: auto;
+        min-height: 300px;
     }
 
     .product-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
+        height: auto;
+        max-height: 420px;
+        object-fit: contain;
     }
 
     .product-info {
-      padding: 22px;
+        padding: 18px;
     }
-
-    .category {
-      font-size: 11px;
-      letter-spacing: 1.5px;
-      color: #999;
-      text-transform: uppercase;
-      margin-bottom: 7px;
-    }
-
-    .product h2 {
-      font-size: 21px;
-      margin-bottom: 12px;
-    }
-
-    .description {
-      color: #666;
-      font-size: 14px;
-      min-height: 68px;
-      margin-bottom: 15px;
-    }
-
-    .price {
-      font-size: 24px;
-      font-weight: bold;
-      margin-bottom: 15px;
-    }
-
-    .order {
-      display: block;
-      text-align: center;
-      background: #222;
-      color: white;
-      text-decoration: none;
-      padding: 13px 15px;
-      border-radius: 9px;
-      font-weight: bold;
-      transition: background 0.2s;
-    }
-
-    .order:hover {
-      background: #444;
-    }
-
-    footer {
-      background: white;
-      border-top: 1px solid #eee;
-      text-align: center;
-      padding: 35px 20px;
-      color: #777;
-    }
-
-    footer strong {
-      color: #222;
-    }
-
-    .instagram {
-      display: inline-block;
-      margin-top: 8px;
-      color: #222;
-      text-decoration: none;
-      font-weight: bold;
-    }
-
-    @media (max-width: 600px) {
-      .logo {
-        font-size: 30px;
-      }
-
-      .hero h1 {
-        font-size: 26px;
-      }
-
-      .products {
-        grid-template-columns: 1fr;
-        padding: 0 15px;
-      }
-
-      .product-image {
-        height: 330px;
-      }
-    }
-  </style>
+}
+</style>
 </head>
 
 <body>
 
+<!-- HEADER -->
 <header>
-  <div class="logo">SIMILYA</div>
-  <div class="tagline">SANTÉ • BEAUTÉ • BIEN-ÊTRE</div>
+    <h1 class="logo">SIMILYA</h1>
+    <p class="tagline">SANTÉ • BEAUTÉ • BIEN-ÊTRE</p>
 </header>
 
+
+<!-- HERO -->
 <section class="hero">
-  <h1>Découvrez nos produits</h1>
-  <p>
-    Une sélection de soins pour votre beauté, votre hygiène
-    et votre bien-être au quotidien.
-  </p>
+    <h1>Découvrez nos produits</h1>
+
+    <p>
+        Une sélection de soins pour votre beauté,
+        votre hygiène et votre bien-être au quotidien.
+    </p>
 </section>
 
+
+<!-- PRODUCTS -->
 <section class="products">
 
-  <!-- 1 -->
-  <div class="product">
-    <div class="product-image">
-      <img src="product.jpg1" alt="Crème déodorante">
+
+    <!-- 1. CRÈME DÉODORANTE -->
+    <div class="product">
+
+        <div class="product-image">
+            <img
+                src="./productjpg1"
+                alt="Crème déodorante SIMILYA"
+                loading="lazy"
+            >
+        </div>
+
+        <div class="product-info">
+
+            <div class="category">
+                Hygiène
+            </div>
+
+            <h2>
+                Crème déodorante
+            </h2>
+
+            <div class="description">
+                Protège 24h • Neutralise les odeurs • Respecte la peau
+            </div>
+
+            <div class="price">
+                155 DH
+            </div>
+
+            <a
+                class="order"
+                href="https://wa.me/212771849543?text=Bonjour%20SIMILYA%2C%20je%20souhaite%20commander%20la%20Cr%C3%A8me%20d%C3%A9odorante%20%C3%A0%20155%20DH."
+                target="_blank"
+            >
+                Commander sur WhatsApp
+            </a>
+
+        </div>
     </div>
 
-    <div class="product-info">
-      <div class="category">Hygiène</div>
 
-      <h2>Crème déodorante</h2>
+    <!-- 2. SPRAY GENCIVES & HALEINE -->
+    <div class="product">
 
-      <div class="description">
-        Protège 24h • Neutralise les odeurs • Respecte la peau
-      </div>
+        <div class="product-image">
+            <img
+                src="./productjpg2"
+                alt="Spray gencives et haleine SIMILYA"
+                loading="lazy"
+            >
+        </div>
 
-      <div class="price">155 DH</div>
+        <div class="product-info">
 
-      <a class="order"
-         href="https://wa.me/212771849543?text=Bonjour%20SIMILYA%2C%20je%20souhaite%20commander%20la%20Cr%C3%A8me%20d%C3%A9odorante%20%C3%A0%20155%20DH."
-         target="_blank">
-        Commander sur WhatsApp
-      </a>
-    </div>
-  </div>
+            <div class="category">
+                Hygiène buccale
+            </div>
 
+            <h2>
+                Spray gencives & haleine
+            </h2>
 
-  <!-- 2 -->
-  <div class="product">
-    <div class="product-image">
-      <img src="product.jpg2" alt="Spray gencives et haleine">
-    </div>
+            <div class="description">
+                Apaise les gencives • Combat la mauvaise haleine • Protège durablement
+            </div>
 
-    <div class="product-info">
-      <div class="category">Hygiène buccale</div>
+            <div class="price">
+                155 DH
+            </div>
 
-      <h2>Spray gencives &amp; haleine</h2>
+            <a
+                class="order"
+                href="https://wa.me/212771849543?text=Bonjour%20SIMILYA%2C%20je%20souhaite%20commander%20le%20Spray%20gencives%20%26%20haleine%20%C3%A0%20155%20DH."
+                target="_blank"
+            >
+                Commander sur WhatsApp
+            </a>
 
-      <div class="description">
-        Apaise les gencives • Combat la mauvaise haleine • Protège durablement
-      </div>
-
-      <div class="price">155 DH</div>
-
-      <a class="order"
-         href="https://wa.me/212771849543?text=Bonjour%20SIMILYA%2C%20je%20souhaite%20commander%20le%20Spray%20gencives%20%26%20haleine%20%C3%A0%20155%20DH."
-         target="_blank">
-        Commander sur WhatsApp
-      </a>
-    </div>
-  </div>
-
-
-  <!-- 3 -->
-  <div class="product">
-    <div class="product-image">
-      <img src="product.jpg3" alt="Sérum anti-acné corps">
+        </div>
     </div>
 
-    <div class="product-info">
-      <div class="category">Corps</div>
 
-      <h2>Sérum anti-acné corps</h2>
+    <!-- 3. SÉRUM ANTI-ACNÉ CORPS -->
+    <div class="product">
 
-      <div class="description">
-        Réduit les imperfections • Purifie la peau • Apaise les irritations
-      </div>
+        <div class="product-image">
+            <img
+                src="./productjpg3"
+                alt="Sérum anti-acné corps SIMILYA"
+                loading="lazy"
+            >
+        </div>
 
-      <div class="price">190 DH</div>
+        <div class="product-info">
 
-      <a class="order"
-         href="https://wa.me/212771849543?text=Bonjour%20SIMILYA%2C%20je%20souhaite%20commander%20le%20S%C3%A9rum%20anti-acn%C3%A9%20corps%20%C3%A0%20190%20DH."
-         target="_blank">
-        Commander sur WhatsApp
-      </a>
-    </div>
-  </div>
+            <div class="category">
+                Corps
+            </div>
 
+            <h2>
+                Sérum anti-acné corps
+            </h2>
 
-  <!-- 4 -->
-  <div class="product">
-    <div class="product-image">
-      <img src="product.jpg4" alt="Sérum hydratant cheveux">
-    </div>
+            <div class="description">
+                Réduit les imperfections • Purifie la peau • Apaise les irritations
+            </div>
 
-    <div class="product-info">
-      <div class="category">Cheveux</div>
+            <div class="price">
+                190 DH
+            </div>
 
-      <h2>Sérum hydratant cheveux</h2>
+            <a
+                class="order"
+                href="https://wa.me/212771849543?text=Bonjour%20SIMILYA%2C%20je%20souhaite%20commander%20le%20S%C3%A9rum%20anti-acn%C3%A9%20corps%20%C3%A0%20190%20DH."
+                target="_blank"
+            >
+                Commander sur WhatsApp
+            </a>
 
-      <div class="description">
-        Hydrate en profondeur • Renforce la fibre capillaire • Apporte brillance et douceur
-      </div>
-
-      <div class="price">185 DH</div>
-
-      <a class="order"
-         href="https://wa.me/212771849543?text=Bonjour%20SIMILYA%2C%20je%20souhaite%20commander%20le%20S%C3%A9rum%20hydratant%20cheveux%20%C3%A0%20185%20DH."
-         target="_blank">
-        Commander sur WhatsApp
-      </a>
-    </div>
-  </div>
-
-
-  <!-- 5 -->
-  <div class="product">
-    <div class="product-image">
-      <img src="product.jpg5" alt="Huile croissance barbe">
+        </div>
     </div>
 
-    <div class="product-info">
-      <div class="category">Barbe</div>
 
-      <h2>Huile croissance barbe</h2>
+    <!-- 4. SÉRUM HYDRATANT CHEVEUX -->
+    <div class="product">
 
-      <div class="description">
-        Stimule la pousse • Nourrit en profondeur • Adoucit et assouplit
-      </div>
+        <div class="product-image">
+            <img
+                src="./productjpg4"
+                alt="Sérum hydratant cheveux SIMILYA"
+                loading="lazy"
+            >
+        </div>
 
-      <div class="price">155 DH</div>
+        <div class="product-info">
 
-      <a class="order"
-         href="https://wa.me/212771849543?text=Bonjour%20SIMILYA%2C%20je%20souhaite%20commander%20l%27Huile%20croissance%20barbe%20%C3%A0%20155%20DH."
-         target="_blank">
-        Commander sur WhatsApp
-      </a>
-    </div>
-  </div>
+            <div class="category">
+                Cheveux
+            </div>
 
+            <h2>
+                Sérum hydratant cheveux
+            </h2>
 
-  <!-- 6 -->
-  <div class="product">
-    <div class="product-image">
-      <img src="product.jpg6" alt="Sérum anti-acné visage">
-    </div>
+            <div class="description">
+                Hydrate en profondeur • Renforce la fibre capillaire • Apporte brillance et douceur
+            </div>
 
-    <div class="product-info">
-      <div class="category">Acné</div>
+            <div class="price">
+                185 DH
+            </div>
 
-      <h2>Sérum anti-acné visage</h2>
+            <a
+                class="order"
+                href="https://wa.me/212771849543?text=Bonjour%20SIMILYA%2C%20je%20souhaite%20commander%20le%20S%C3%A9rum%20hydratant%20cheveux%20%C3%A0%20185%20DH."
+                target="_blank"
+            >
+                Commander sur WhatsApp
+            </a>
 
-      <div class="description">
-        Réduit les boutons • Purifie la peau • Régule le sébum
-      </div>
-
-      <div class="price">185 DH</div>
-
-      <a class="order"
-         href="https://wa.me/212771849543?text=Bonjour%20SIMILYA%2C%20je%20souhaite%20commander%20le%20S%C3%A9rum%20anti-acn%C3%A9%20visage%20%C3%A0%20185%20DH."
-         target="_blank">
-        Commander sur WhatsApp
-      </a>
-    </div>
-  </div>
-
-
-  <!-- 7 -->
-  <div class="product">
-    <div class="product-image">
-      <img src="product.jpg7" alt="Shampooing anti-poux">
+        </div>
     </div>
 
-    <div class="product-info">
-      <div class="category">Cuir chevelu</div>
 
-      <h2>Shampooing anti-poux</h2>
+    <!-- 5. HUILE CROISSANCE BARBE -->
+    <div class="product">
 
-      <div class="description">
-        Élimine les poux • Protège le cuir chevelu • Apporte fraîcheur
-      </div>
+        <div class="product-image">
+            <img
+                src="./productjpg5"
+                alt="Huile croissance barbe SIMILYA"
+                loading="lazy"
+            >
+        </div>
 
-      <div class="price">175 DH</div>
+        <div class="product-info">
 
-      <a class="order"
-         href="https://wa.me/212771849543?text=Bonjour%20SIMILYA%2C%20je%20souhaite%20commander%20le%20Shampooing%20anti-poux%20%C3%A0%20175%20DH."
-         target="_blank">
-        Commander sur WhatsApp
-      </a>
+            <div class="category">
+                Barbe
+            </div>
+
+            <h2>
+                Huile croissance barbe
+            </h2>
+
+            <div class="description">
+                Stimule la pousse • Nourrit en profondeur • Adoucit et assouplit
+            </div>
+
+            <div class="price">
+                155 DH
+            </div>
+
+            <a
+                class="order"
+                href="https://wa.me/212771849543?text=Bonjour%20SIMILYA%2C%20je%20souhaite%20commander%20l%27Huile%20croissance%20barbe%20%C3%A0%20155%20DH."
+                target="_blank"
+            >
+                Commander sur WhatsApp
+            </a>
+
+        </div>
     </div>
-  </div>
 
 
-  <!-- 8 -->
-  <div class="product">
-    <div class="product-image">
-      <img src="product.jpg8" alt="Crème solaire SPF 50+">
+    <!-- 6. SÉRUM ANTI-ACNÉ VISAGE -->
+    <div class="product">
+
+        <div class="product-image">
+            <img
+                src="./productjpg6"
+                alt="Sérum anti-acné visage SIMILYA"
+                loading="lazy"
+            >
+        </div>
+
+        <div class="product-info">
+
+            <div class="category">
+                Acné
+            </div>
+
+            <h2>
+                Sérum anti-acné visage
+            </h2>
+
+            <div class="description">
+                Réduit les boutons • Purifie la peau • Régule le sébum
+            </div>
+
+            <div class="price">
+                185 DH
+            </div>
+
+            <a
+                class="order"
+                href="https://wa.me/212771849543?text=Bonjour%20SIMILYA%2C%20je%20souhaite%20commander%20le%20S%C3%A9rum%20anti-acn%C3%A9%20visage%20%C3%A0%20185%20DH."
+                target="_blank"
+            >
+                Commander sur WhatsApp
+            </a>
+
+        </div>
     </div>
 
-    <div class="product-info">
-      <div class="category">Solaire</div>
 
-      <h2>Crème solaire SPF 50+</h2>
+    <!-- 7. SHAMPOOING ANTI-POUX -->
+    <div class="product">
 
-      <div class="description">
-        Protection UV large spectre • Hydrate la peau • Prévient le vieillissement
-      </div>
+        <div class="product-image">
+            <img
+                src="./productjpg7"
+                alt="Shampooing anti-poux SIMILYA"
+                loading="lazy"
+            >
+        </div>
 
-      <div class="price">190 DH</div>
+        <div class="product-info">
 
-      <a class="order"
-         href="https://wa.me/212771849543?text=Bonjour%20SIMILYA%2C%20je%20souhaite%20commander%20la%20Cr%C3%A8me%20solaire%20SPF%2050%2B%20%C3%A0%20190%20DH."
-         target="_blank">
-        Commander sur WhatsApp
-      </a>
+            <div class="category">
+                Cuir chevelu
+            </div>
+
+            <h2>
+                Shampooing anti-poux
+            </h2>
+
+            <div class="description">
+                Élimine les poux • Protège le cuir chevelu • Apporte fraîcheur
+            </div>
+
+            <div class="price">
+                175 DH
+            </div>
+
+            <a
+                class="order"
+                href="https://wa.me/212771849543?text=Bonjour%20SIMILYA%2C%20je%20souhaite%20commander%20le%20Shampooing%20anti-poux%20%C3%A0%20175%20DH."
+                target="_blank"
+            >
+                Commander sur WhatsApp
+            </a>
+
+        </div>
     </div>
-  </div>
+
+
+    <!-- 8. CRÈME SOLAIRE -->
+    <div class="product">
+
+        <div class="product-image">
+            <img
+                src="./productjpg8"
+                alt="Crème solaire SPF 50+ SIMILYA"
+                loading="lazy"
+            >
+        </div>
+
+        <div class="product-info">
+
+            <div class="category">
+                Solaire
+            </div>
+
+            <h2>
+                Crème solaire SPF 50+
+            </h2>
+
+            <div class="description">
+                Protection UV large spectre • Hydrate la peau • Prévient le vieillissement
+            </div>
+
+            <div class="price">
+                190 DH
+            </div>
+
+            <a
+                class="order"
+                href="https://wa.me/212771849543?text=Bonjour%20SIMILYA%2C%20je%20souhaite%20commander%20la%20Cr%C3%A8me%20solaire%20SPF%2050%2B%20%C3%A0%20190%20DH."
+                target="_blank"
+            >
+                Commander sur WhatsApp
+            </a>
+
+        </div>
+    </div>
+
 
 </section>
 
 
-<footer>
-  <p>
-    <strong>SIMILYA</strong> — SANTÉ • BEAUTÉ • BIEN-ÊTRE
-  </p>
+<!-- INSTAGRAM -->
+<section class="instagram-section">
 
-  <p>
-    Instagram :
-    <a class="instagram"
-       href="https://instagram.com/similya_pro1"
-       target="_blank">
-      @similya_pro1
+    <h2>
+        Suivez-nous sur Instagram
+    </h2>
+
+    <p>
+        Découvrez nos nouveautés et nos produits.
+    </p>
+
+    <a
+        class="instagram"
+        href="https://www.instagram.com/similya_pro1/"
+        target="_blank"
+    >
+        @similya_pro1
     </a>
-  </p>
+
+</section>
+
+
+<!-- FOOTER -->
+<footer>
+
+    <p>
+        <strong>SIMILYA</strong>
+    </p>
+
+    <p>
+        SANTÉ • BEAUTÉ • BIEN-ÊTRE
+    </p>
+
+    <p>
+        WhatsApp : 0771849543
+    </p>
+
+    <p>
+        © 2026 SIMILYA. Tous droits réservés.
+    </p>
+
 </footer>
 
 </body>
