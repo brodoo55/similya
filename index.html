@@ -4,10 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>SIMILYA | Santé • Beauté • Bien-être</title>
-
-  <meta name="description"
-        content="SIMILYA - Santé, Beauté et Bien-être. Découvrez nos produits et commandez facilement via WhatsApp.">
+  <title>SIMILYA — Santé • Beauté • Bien-être</title>
 
   <style>
     * {
@@ -20,7 +17,6 @@
       font-family: Arial, Helvetica, sans-serif;
       background: #f8f7f4;
       color: #222;
-      line-height: 1.6;
     }
 
     a {
@@ -29,13 +25,12 @@
 
     /* HEADER */
     header {
-      background: rgba(255,255,255,0.96);
+      background: #fff;
       border-bottom: 1px solid #e8e5df;
       padding: 18px 20px;
       position: sticky;
       top: 0;
       z-index: 1000;
-      backdrop-filter: blur(10px);
     }
 
     .header-inner {
@@ -44,14 +39,12 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 20px;
     }
 
     .logo {
       font-size: 27px;
       font-weight: 700;
       letter-spacing: 3px;
-      color: #1f1f1f;
     }
 
     .tagline {
@@ -64,7 +57,6 @@
     nav {
       display: flex;
       gap: 20px;
-      align-items: center;
     }
 
     nav a {
@@ -73,37 +65,26 @@
       font-weight: 600;
     }
 
-    nav a:hover {
-      color: #9a7653;
-    }
-
     /* HERO */
     .hero {
       max-width: 1200px;
       margin: auto;
-      padding: 70px 20px 55px;
+      padding: 70px 20px 50px;
       text-align: center;
     }
 
     .hero h1 {
       font-size: clamp(34px, 6vw, 58px);
-      font-weight: 700;
-      letter-spacing: 3px;
-      margin-bottom: 15px;
+      font-weight: 500;
+      margin-bottom: 18px;
     }
 
     .hero p {
-      max-width: 650px;
+      max-width: 700px;
       margin: auto;
       color: #666;
-      font-size: 17px;
-    }
-
-    .hero-line {
-      width: 60px;
-      height: 2px;
-      background: #9a7653;
-      margin: 25px auto;
+      font-size: 16px;
+      line-height: 1.7;
     }
 
     /* PRODUCTS */
@@ -119,9 +100,9 @@
     }
 
     .section-title h2 {
-      font-size: 30px;
-      letter-spacing: 1px;
-      margin-bottom: 8px;
+      font-size: 32px;
+      font-weight: 500;
+      margin-bottom: 10px;
     }
 
     .section-title p {
@@ -135,20 +116,14 @@
       gap: 24px;
     }
 
-    /* PRODUCT CARD */
+    /* CARD */
     .product-card {
       background: #fff;
-      border: 1px solid #e9e6e0;
-      border-radius: 16px;
+      border: 1px solid #e5e2dc;
+      border-radius: 14px;
       overflow: hidden;
-      transition: transform 0.25s ease, box-shadow 0.25s ease;
       display: flex;
       flex-direction: column;
-    }
-
-    .product-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 12px 35px rgba(0,0,0,0.08);
     }
 
     .product-image {
@@ -156,36 +131,35 @@
       aspect-ratio: 1 / 1;
       object-fit: cover;
       display: block;
-      background: #f3f2ef;
+      background: #f1f0ed;
     }
 
     .product-content {
-      padding: 20px;
+      padding: 18px;
       display: flex;
       flex-direction: column;
       flex: 1;
     }
 
     .category {
-      font-size: 10px;
-      letter-spacing: 1.5px;
-      color: #9a7653;
+      color: #8f6d4d;
+      font-size: 11px;
       font-weight: 700;
+      letter-spacing: 1.3px;
       margin-bottom: 8px;
-      text-transform: uppercase;
     }
 
     .product-name {
       font-size: 18px;
-      font-weight: 700;
-      margin-bottom: 4px;
-      color: #222;
+      font-weight: 600;
+      line-height: 1.35;
+      margin-bottom: 5px;
     }
 
     .product-size {
       color: #888;
       font-size: 13px;
-      margin-bottom: 13px;
+      margin-bottom: 14px;
     }
 
     .benefits {
@@ -195,45 +169,42 @@
     }
 
     .benefits li {
-      font-size: 13px;
       color: #555;
+      font-size: 13px;
       margin-bottom: 6px;
-      padding-left: 16px;
+      padding-left: 15px;
+      line-height: 1.45;
       position: relative;
     }
 
     .benefits li::before {
-      content: "✓";
+      content: "•";
       position: absolute;
       left: 0;
-      color: #9a7653;
+      color: #8f6d4d;
       font-weight: bold;
     }
 
     .price {
-      font-size: 23px;
+      font-size: 22px;
       font-weight: 700;
-      color: #222;
-      margin-bottom: 15px;
+      margin-bottom: 14px;
     }
 
     .order-btn {
-      display: block;
       width: 100%;
       border: none;
-      border-radius: 10px;
-      padding: 13px 15px;
+      border-radius: 9px;
+      padding: 12px;
       background: #222;
-      color: white;
-      font-size: 14px;
+      color: #fff;
+      font-size: 13px;
       font-weight: 700;
       cursor: pointer;
-      transition: background 0.2s ease, transform 0.2s ease;
     }
 
     .order-btn:hover {
-      background: #9a7653;
-      transform: translateY(-1px);
+      background: #8f6d4d;
     }
 
     /* INSTAGRAM */
@@ -246,7 +217,8 @@
     }
 
     .instagram-section h2 {
-      font-size: 25px;
+      font-size: 26px;
+      font-weight: 500;
       margin-bottom: 10px;
     }
 
@@ -257,17 +229,16 @@
 
     .instagram-btn {
       display: inline-block;
-      padding: 13px 25px;
-      border-radius: 10px;
+      padding: 12px 24px;
+      border-radius: 9px;
       background: #222;
-      color: white;
+      color: #fff;
       font-weight: 700;
       font-size: 14px;
-      transition: background 0.2s ease;
     }
 
     .instagram-btn:hover {
-      background: #9a7653;
+      background: #8f6d4d;
     }
 
     /* FOOTER */
@@ -290,11 +261,7 @@
       font-size: 13px;
     }
 
-    footer a {
-      color: #fff;
-    }
-
-    /* WHATSAPP FLOAT */
+    /* WHATSAPP */
     .whatsapp-float {
       position: fixed;
       right: 20px;
@@ -303,18 +270,18 @@
       height: 58px;
       border-radius: 50%;
       background: #25D366;
-      color: white;
+      color: #fff;
       display: flex;
-      align-items: center;
       justify-content: center;
-      font-size: 25px;
+      align-items: center;
+      font-size: 24px;
       font-weight: bold;
-      box-shadow: 0 8px 25px rgba(0,0,0,0.2);
       z-index: 2000;
+      box-shadow: 0 5px 20px rgba(0,0,0,.2);
     }
 
     .whatsapp-float:hover {
-      transform: scale(1.06);
+      transform: scale(1.05);
     }
 
     /* RESPONSIVE */
@@ -327,11 +294,11 @@
     @media (max-width: 750px) {
       .products-grid {
         grid-template-columns: repeat(2, 1fr);
-        gap: 15px;
+        gap: 14px;
       }
 
       .product-content {
-        padding: 15px;
+        padding: 14px;
       }
 
       .product-name {
@@ -341,53 +308,41 @@
       .price {
         font-size: 20px;
       }
-
-      nav {
-        gap: 12px;
-      }
-
-      nav a {
-        font-size: 12px;
-      }
     }
 
     @media (max-width: 500px) {
-      header {
-        padding: 14px 15px;
-      }
-
       .logo {
         font-size: 22px;
       }
 
-      .tagline {
-        font-size: 8px;
+      nav {
+        gap: 10px;
+      }
+
+      nav a {
+        font-size: 11px;
       }
 
       .hero {
-        padding: 50px 18px 40px;
+        padding: 50px 15px 40px;
       }
 
       .hero h1 {
         font-size: 32px;
       }
 
-      .hero p {
-        font-size: 15px;
-      }
-
       .products-section {
-        padding-left: 12px;
-        padding-right: 12px;
+        padding-left: 10px;
+        padding-right: 10px;
       }
 
       .products-grid {
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: repeat(2, 1fr);
         gap: 10px;
       }
 
       .product-content {
-        padding: 12px;
+        padding: 11px;
       }
 
       .category {
@@ -396,7 +351,6 @@
 
       .product-name {
         font-size: 14px;
-        line-height: 1.35;
       }
 
       .product-size {
@@ -405,7 +359,6 @@
 
       .benefits li {
         font-size: 11px;
-        padding-left: 13px;
       }
 
       .price {
@@ -413,8 +366,8 @@
       }
 
       .order-btn {
-        font-size: 12px;
-        padding: 11px 7px;
+        font-size: 11px;
+        padding: 10px 5px;
       }
     }
   </style>
@@ -433,7 +386,10 @@
 
       <nav>
         <a href="#produits">Produits</a>
-        <a href="https://www.instagram.com/similya_pro1/" target="_blank">
+
+        <a
+          href="https://www.instagram.com/similya_pro1/"
+          target="_blank">
           Instagram
         </a>
       </nav>
@@ -445,13 +401,11 @@
   <!-- HERO -->
   <section class="hero">
 
-    <h1>SIMILYA</h1>
-
-    <div class="hero-line"></div>
+    <h1>Découvrez notre collection</h1>
 
     <p>
-      Découvrez notre sélection de produits pour la santé,
-      la beauté et le bien-être.
+      Des produits sélectionnés pour prendre soin de votre beauté,
+      votre hygiène et votre bien-être au quotidien.
     </p>
 
   </section>
@@ -461,26 +415,37 @@
   <section class="products-section" id="produits">
 
     <div class="section-title">
+
       <h2>Nos Produits</h2>
-      <p>Commandez facilement directement via WhatsApp</p>
+
+      <p>
+        Découvrez nos produits et commandez facilement via WhatsApp.
+      </p>
+
     </div>
 
 
     <div class="products-grid">
 
 
-      <!-- PRODUCT 1 -->
+      <!-- ================================================= -->
+      <!-- 1 — CRÈME SOLAIRE -->
+      <!-- IMAGE = product1.jpg -->
+      <!-- ================================================= -->
+
       <article class="product-card">
 
         <img
           class="product-image"
-          src="https://raw.githubusercontent.com/brodoo55/similya/main/product1.jpg"
+          src="product1.jpg"
           alt="Crème solaire SPF 50+"
         >
 
         <div class="product-content">
 
-          <div class="category">SOLAIRE</div>
+          <div class="category">
+            SOLAIRE
+          </div>
 
           <div class="product-name">
             Crème solaire SPF 50+
@@ -511,18 +476,24 @@
       </article>
 
 
-      <!-- PRODUCT 2 -->
+      <!-- ================================================= -->
+      <!-- 2 — CRÈME DÉODORANTE -->
+      <!-- IMAGE = product2.jpg -->
+      <!-- ================================================= -->
+
       <article class="product-card">
 
         <img
           class="product-image"
-          src="https://raw.githubusercontent.com/brodoo55/similya/main/product2.jpg"
+          src="product2.jpg"
           alt="Crème déodorante"
         >
 
         <div class="product-content">
 
-          <div class="category">HYGIÈNE</div>
+          <div class="category">
+            HYGIÈNE
+          </div>
 
           <div class="product-name">
             Crème déodorante
@@ -553,21 +524,27 @@
       </article>
 
 
-      <!-- PRODUCT 3 -->
+      <!-- ================================================= -->
+      <!-- 3 — SÉRUM ANTI-ACNÉ -->
+      <!-- IMAGE = product3.jpg -->
+      <!-- ================================================= -->
+
       <article class="product-card">
 
         <img
           class="product-image"
-          src="https://raw.githubusercontent.com/brodoo55/similya/main/product3.jpg"
-          alt="Sérum anti-acné visage"
+          src="product3.jpg"
+          alt="Sérum anti-acné"
         >
 
         <div class="product-content">
 
-          <div class="category">ACNÉ</div>
+          <div class="category">
+            ACNÉ
+          </div>
 
           <div class="product-name">
-            Sérum anti-acné visage
+            Sérum anti-acné
           </div>
 
           <div class="product-size">
@@ -586,7 +563,7 @@
 
           <button
             class="order-btn"
-            onclick="orderProduct('Sérum anti-acné visage', '185 DH')">
+            onclick="orderProduct('Sérum anti-acné', '185 DH')">
             Commander sur WhatsApp
           </button>
 
@@ -595,18 +572,24 @@
       </article>
 
 
-      <!-- PRODUCT 4 -->
+      <!-- ================================================= -->
+      <!-- 4 — HUILE CROISSANCE BARBE -->
+      <!-- IMAGE = product4.jpg -->
+      <!-- ================================================= -->
+
       <article class="product-card">
 
         <img
           class="product-image"
-          src="https://raw.githubusercontent.com/brodoo55/similya/main/product4.jpg"
+          src="product4.jpg"
           alt="Huile croissance barbe"
         >
 
         <div class="product-content">
 
-          <div class="category">BARBE</div>
+          <div class="category">
+            BARBE
+          </div>
 
           <div class="product-name">
             Huile croissance barbe
@@ -637,18 +620,24 @@
       </article>
 
 
-      <!-- PRODUCT 5 -->
+      <!-- ================================================= -->
+      <!-- 5 — SÉRUM HYDRATANT CHEVEUX -->
+      <!-- IMAGE = product5.jpg -->
+      <!-- ================================================= -->
+
       <article class="product-card">
 
         <img
           class="product-image"
-          src="https://raw.githubusercontent.com/brodoo55/similya/main/product5.jpg"
+          src="product5.jpg"
           alt="Sérum hydratant cheveux"
         >
 
         <div class="product-content">
 
-          <div class="category">CHEVEUX</div>
+          <div class="category">
+            CHEVEUX
+          </div>
 
           <div class="product-name">
             Sérum hydratant cheveux
@@ -679,18 +668,24 @@
       </article>
 
 
-      <!-- PRODUCT 6 -->
+      <!-- ================================================= -->
+      <!-- 6 — SPRAY GENCIVES & HALEINE -->
+      <!-- IMAGE = product6.jpg -->
+      <!-- ================================================= -->
+
       <article class="product-card">
 
         <img
           class="product-image"
-          src="https://raw.githubusercontent.com/brodoo55/similya/main/product6.jpg"
+          src="product6.jpg"
           alt="Spray gencives et haleine"
         >
 
         <div class="product-content">
 
-          <div class="category">HYGIÈNE BUCCALE</div>
+          <div class="category">
+            HYGIÈNE BUCCALE
+          </div>
 
           <div class="product-name">
             Spray gencives &amp; haleine
@@ -721,18 +716,24 @@
       </article>
 
 
-      <!-- PRODUCT 7 -->
+      <!-- ================================================= -->
+      <!-- 7 — SHAMPOOING ANTI-POUX -->
+      <!-- IMAGE = product7.jpg -->
+      <!-- ================================================= -->
+
       <article class="product-card">
 
         <img
           class="product-image"
-          src="https://raw.githubusercontent.com/brodoo55/similya/main/product7.jpg"
+          src="product7.jpg"
           alt="Shampooing anti-poux"
         >
 
         <div class="product-content">
 
-          <div class="category">CUIR CHEVELU</div>
+          <div class="category">
+            CUIR CHEVELU
+          </div>
 
           <div class="product-name">
             Shampooing anti-poux
@@ -763,18 +764,24 @@
       </article>
 
 
-      <!-- PRODUCT 8 -->
+      <!-- ================================================= -->
+      <!-- 8 — SÉRUM ANTI-ACNÉ CORPS -->
+      <!-- IMAGE = product8.jpg -->
+      <!-- ================================================= -->
+
       <article class="product-card">
 
         <img
           class="product-image"
-          src="https://raw.githubusercontent.com/brodoo55/similya/main/product8.jpg"
+          src="product8.jpg"
           alt="Sérum anti-acné corps"
         >
 
         <div class="product-content">
 
-          <div class="category">CORPS</div>
+          <div class="category">
+            CORPS
+          </div>
 
           <div class="product-name">
             Sérum anti-acné corps
@@ -847,7 +854,7 @@
   </footer>
 
 
-  <!-- WHATSAPP FLOATING BUTTON -->
+  <!-- WHATSAPP -->
   <a
     class="whatsapp-float"
     href="https://wa.me/212771849543"
@@ -871,13 +878,13 @@
         "Prix : " + price + "\n\n" +
         "Merci.";
 
-      const whatsappURL =
+      const url =
         "https://wa.me/" +
         phone +
         "?text=" +
         encodeURIComponent(message);
 
-      window.open(whatsappURL, "_blank");
+      window.open(url, "_blank");
     }
 
   </script>
