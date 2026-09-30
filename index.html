@@ -1,90 +1,124 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
 
 <title>SIMILYA — Santé • Beauté • Bien-être</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
+
+*{
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
 
 body{
+  margin:0;
   font-family:Arial,Helvetica,sans-serif;
-  background:#f8f7f4;
+  background:#f7f5f1;
   color:#222;
 }
 
-a{text-decoration:none}
+/* HEADER */
 
 header{
   background:#fff;
-  border-bottom:1px solid #e8e5df;
-  padding:18px 20px;
+  border-bottom:1px solid #e5e5e5;
   position:sticky;
   top:0;
-  z-index:1000;
+  z-index:20;
 }
 
-.header-inner{
+.nav{
   max-width:1200px;
   margin:auto;
+  padding:16px 20px;
   display:flex;
-  justify-content:space-between;
   align-items:center;
+  justify-content:space-between;
+  gap:20px;
 }
 
 .logo{
-  font-size:27px;
-  font-weight:700;
-  letter-spacing:3px;
+  font-size:28px;
+  font-weight:800;
+  letter-spacing:4px;
 }
 
-.tagline{
-  font-size:10px;
-  letter-spacing:2px;
-  color:#777;
-  margin-top:2px;
+.logo span{
+  color:#5d8b63;
 }
 
 nav{
   display:flex;
-  gap:20px;
+  gap:25px;
 }
 
 nav a{
+  text-decoration:none;
   color:#333;
-  font-size:14px;
   font-weight:600;
 }
 
+.nav-whatsapp{
+  text-decoration:none;
+  background:#168c3a;
+  color:white;
+  padding:10px 15px;
+  border-radius:9px;
+  font-weight:700;
+}
+
+/* HERO */
+
 .hero{
   max-width:1200px;
-  margin:auto;
-  padding:70px 20px 50px;
+  margin:0 auto;
+  padding:75px 20px 55px;
   text-align:center;
 }
 
+.kicker{
+  color:#8a6c4c;
+  font-size:14px;
+  font-weight:800;
+  letter-spacing:2px;
+  margin-bottom:15px;
+}
+
 .hero h1{
-  font-size:clamp(34px,6vw,58px);
-  font-weight:500;
-  margin-bottom:18px;
+  margin:0;
+  font-size:46px;
+  line-height:1.15;
+}
+
+.hero h1 span{
+  color:#5d8b63;
 }
 
 .hero p{
   max-width:700px;
-  margin:auto;
-  color:#666;
-  font-size:16px;
+  margin:20px auto 0;
+  font-size:18px;
   line-height:1.7;
+  color:#666;
 }
+
+/* PRODUCTS */
 
 .products-section{
   max-width:1200px;
   margin:auto;
-  padding:10px 20px 70px;
+  padding:20px 20px 70px;
 }
 
 .section-title{
@@ -94,40 +128,41 @@ nav a{
 
 .section-title h2{
   font-size:32px;
-  font-weight:500;
-  margin-bottom:10px;
+  margin:0 0 10px;
 }
 
 .section-title p{
   color:#777;
-  font-size:14px;
+  margin:0;
 }
 
-.products-grid{
+.grid{
   display:grid;
   grid-template-columns:repeat(4,1fr);
-  gap:24px;
+  gap:22px;
 }
 
-.product-card{
+/* CARD */
+
+.card{
   background:#fff;
-  border:1px solid #e5e2dc;
-  border-radius:14px;
+  border:1px solid #e4e0da;
+  border-radius:16px;
   overflow:hidden;
+  box-shadow:0 5px 20px rgba(0,0,0,.05);
   display:flex;
   flex-direction:column;
 }
 
-.product-image{
+.card-image{
   width:100%;
-  aspect-ratio:1/1;
+  height:270px;
   object-fit:cover;
-  display:block;
-  background:#f1f0ed;
+  background:#f0eee9;
 }
 
-.product-content{
-  padding:18px;
+.card-body{
+  padding:20px;
   display:flex;
   flex-direction:column;
   flex:1;
@@ -135,525 +170,667 @@ nav a{
 
 .category{
   color:#8f6d4d;
-  font-size:11px;
-  font-weight:700;
-  letter-spacing:1.3px;
+  font-size:12px;
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:.5px;
   margin-bottom:8px;
 }
 
-.product-name{
-  font-size:18px;
-  font-weight:600;
-  line-height:1.35;
-  margin-bottom:5px;
+.card h3{
+  margin:0 0 7px;
+  font-size:20px;
+  line-height:1.3;
 }
 
-.product-size{
-  color:#888;
-  font-size:13px;
-  margin-bottom:14px;
+.size{
+  color:#777;
+  font-size:14px;
+  margin-bottom:12px;
 }
 
 .benefits{
+  margin:0 0 18px;
+  padding:0;
   list-style:none;
-  margin-bottom:18px;
-  flex:1;
+  color:#555;
+  font-size:14px;
+  line-height:1.7;
 }
 
 .benefits li{
-  color:#555;
-  font-size:13px;
-  margin-bottom:6px;
-  padding-left:15px;
-  line-height:1.45;
-  position:relative;
+  margin-bottom:3px;
 }
 
-.benefits li::before{
-  content:"•";
-  position:absolute;
-  left:0;
-  color:#8f6d4d;
-  font-weight:bold;
+/* PRICE */
+
+.price-box{
+  margin-top:auto;
+  margin-bottom:15px;
+  min-height:42px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  flex-wrap:wrap;
 }
 
-.price{
-  font-size:22px;
-  font-weight:700;
-  margin-bottom:14px;
+.old-price{
+  color:#999;
+  font-size:16px;
+  text-decoration:line-through;
 }
 
-.order-btn{
+.sale-price{
+  color:#168c3a;
+  font-size:25px;
+  font-weight:800;
+}
+
+.normal-price{
+  color:#222;
+  font-size:23px;
+  font-weight:800;
+}
+
+/* ORDER BUTTON */
+
+.order{
+  display:block;
   width:100%;
-  border:none;
-  border-radius:9px;
-  padding:12px;
-  background:#222;
-  color:#fff;
-  font-size:13px;
-  font-weight:700;
-  cursor:pointer;
+  text-align:center;
+  background:#168c3a;
+  color:white;
+  text-decoration:none;
+  padding:13px 12px;
+  border-radius:10px;
+  font-weight:800;
+  transition:.2s;
 }
 
-.order-btn:hover{
-  background:#8f6d4d;
+.order:hover{
+  opacity:.9;
 }
+
+/* LOADING */
 
 .loading{
   grid-column:1/-1;
   text-align:center;
-  padding:50px;
+  padding:60px 20px;
   color:#777;
+  font-size:18px;
 }
 
 .error{
   grid-column:1/-1;
   text-align:center;
-  padding:40px;
+  padding:50px 20px;
   color:#b00020;
 }
 
-.instagram-section{
+/* INSTAGRAM */
+
+.instagram{
   background:#fff;
-  border-top:1px solid #e8e5df;
-  border-bottom:1px solid #e8e5df;
+  border-top:1px solid #e5e2dd;
+  border-bottom:1px solid #e5e2dd;
+  padding:65px 20px;
   text-align:center;
-  padding:50px 20px;
 }
 
-.instagram-section h2{
-  font-size:26px;
-  font-weight:500;
-  margin-bottom:10px;
+.instagram h2{
+  margin:0 0 12px;
+  font-size:30px;
 }
 
-.instagram-section p{
+.instagram p{
   color:#777;
-  margin-bottom:20px;
+  margin-bottom:22px;
 }
 
-.instagram-btn{
+.instagram a{
   display:inline-block;
-  padding:12px 24px;
-  border-radius:9px;
   background:#222;
-  color:#fff;
+  color:white;
+  text-decoration:none;
+  padding:13px 22px;
+  border-radius:10px;
   font-weight:700;
-  font-size:14px;
 }
 
-.instagram-btn:hover{
-  background:#8f6d4d;
-}
+/* FOOTER */
 
 footer{
   background:#222;
-  color:#fff;
+  color:white;
   text-align:center;
-  padding:30px 20px;
-}
-
-footer .footer-logo{
-  font-size:22px;
-  font-weight:700;
-  letter-spacing:3px;
-  margin-bottom:8px;
+  padding:35px 20px;
 }
 
 footer p{
-  color:#bbb;
-  font-size:13px;
+  margin:8px 0;
+  color:#ddd;
 }
 
-.whatsapp-float{
-  position:fixed;
-  right:20px;
-  bottom:20px;
-  width:58px;
-  height:58px;
-  border-radius:50%;
-  background:#25D366;
-  color:#fff;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  font-size:24px;
-  font-weight:bold;
-  z-index:2000;
-  box-shadow:0 5px 20px rgba(0,0,0,.2);
+footer b{
+  color:white;
 }
+
+/* RESPONSIVE */
 
 @media(max-width:1000px){
-  .products-grid{
-    grid-template-columns:repeat(3,1fr);
-  }
-}
 
-@media(max-width:750px){
-  .products-grid{
+  .grid{
     grid-template-columns:repeat(2,1fr);
-    gap:14px;
   }
 
-  .product-content{
-    padding:14px;
+  .hero h1{
+    font-size:38px;
   }
 
-  .product-name{
-    font-size:16px;
-  }
-
-  .price{
-    font-size:20px;
-  }
 }
 
-@media(max-width:500px){
+@media(max-width:600px){
+
+  .nav{
+    padding:13px 15px;
+  }
+
   .logo{
-    font-size:22px;
+    font-size:21px;
   }
 
   nav{
-    gap:10px;
+    display:none;
   }
 
-  nav a{
-    font-size:11px;
+  .nav-whatsapp{
+    font-size:13px;
+    padding:9px 11px;
   }
 
   .hero{
-    padding:50px 15px 40px;
+    padding:55px 18px 40px;
   }
 
   .hero h1{
     font-size:32px;
   }
 
+  .hero p{
+    font-size:16px;
+  }
+
   .products-section{
-    padding-left:10px;
-    padding-right:10px;
+    padding:15px 14px 50px;
   }
 
-  .products-grid{
-    grid-template-columns:repeat(2,1fr);
-    gap:10px;
+  .grid{
+    grid-template-columns:1fr;
+    gap:18px;
   }
 
-  .product-content{
-    padding:11px;
+  .card-image{
+    height:300px;
   }
 
-  .category{
-    font-size:8px;
-  }
-
-  .product-name{
-    font-size:14px;
-  }
-
-  .product-size{
-    font-size:11px;
-  }
-
-  .benefits li{
-    font-size:11px;
-  }
-
-  .price{
-    font-size:18px;
-  }
-
-  .order-btn{
-    font-size:11px;
-    padding:10px 5px;
-  }
 }
+
+/* DISCOUNT BADGE */
+
+.discount-badge{
+  display:inline-block;
+  background:#f3dddd;
+  color:#a32929;
+  font-size:11px;
+  font-weight:800;
+  padding:5px 9px;
+  border-radius:20px;
+  margin-bottom:10px;
+}
+
 </style>
+
 </head>
 
 <body>
 
+
+<!-- HEADER -->
+
 <header>
-  <div class="header-inner">
 
-    <div>
-      <div class="logo">SIMILYA</div>
-      <div class="tagline">SANTÉ • BEAUTÉ • BIEN-ÊTRE</div>
-    </div>
+<div class="nav">
 
-    <nav>
-      <a href="#produits">Produits</a>
-      <a href="https://www.instagram.com/similya_pro1/" target="_blank">
-        Instagram
-      </a>
-    </nav>
+<div class="logo">
+SIMIL<span>Y</span>A
+</div>
 
-  </div>
+<nav>
+
+<a href="#products">
+المنتجات
+</a>
+
+<a href="#instagram">
+Instagram
+</a>
+
+<a href="#contact">
+التواصل
+</a>
+
+</nav>
+
+<a
+class="nav-whatsapp"
+href="https://wa.me/212771849543"
+target="_blank"
+>
+WhatsApp
+</a>
+
+</div>
+
 </header>
 
 
+<!-- HERO -->
+
 <section class="hero">
 
-  <h1>Découvrez notre collection</h1>
+<div class="kicker">
+SANTÉ • BEAUTÉ • BIEN-ÊTRE
+</div>
 
-  <p>
-    Des produits sélectionnés pour prendre soin de votre santé,
-    votre beauté et votre bien-être au quotidien.
-  </p>
+<h1>
+اكتشف منتجات
+<span>SIMILYA</span>
+</h1>
 
-</section>
-
-
-<section class="products-section" id="produits">
-
-  <div class="section-title">
-    <h2>Nos Produits</h2>
-    <p>Découvrez nos produits et commandez facilement via WhatsApp.</p>
-  </div>
-
-  <div class="products-grid" id="productsGrid">
-
-    <div class="loading">
-      Chargement des produits...
-    </div>
-
-  </div>
+<p>
+منتجات مختارة للعناية اليومية،
+بتصميم أنيق وتجربة طلب سهلة عبر WhatsApp.
+</p>
 
 </section>
 
 
-<section class="instagram-section">
+<!-- PRODUCTS -->
 
-  <h2>Suivez SIMILYA</h2>
+<section
+class="products-section"
+id="products"
+>
 
-  <p>
-    Découvrez nos nouveautés et actualités sur Instagram.
-  </p>
+<div class="section-title">
 
-  <a
-    class="instagram-btn"
-    href="https://www.instagram.com/similya_pro1/"
-    target="_blank"
-  >
-    @similya_pro1
-  </a>
+<h2>
+منتجاتنا
+</h2>
+
+<p>
+اكتشف مجموعة منتجات SIMILYA
+</p>
+
+</div>
+
+<div
+id="productsGrid"
+class="grid"
+>
+
+<div class="loading">
+Chargement des produits...
+</div>
+
+</div>
 
 </section>
 
 
-<footer>
+<!-- INSTAGRAM -->
 
-  <div class="footer-logo">SIMILYA</div>
+<section
+class="instagram"
+id="instagram"
+>
 
-  <p>SANTÉ • BEAUTÉ • BIEN-ÊTRE</p>
+<h2>
+تابع SIMILYA على Instagram
+</h2>
 
-  <p style="margin-top:10px;">
-    © 2026 SIMILYA — Tous droits réservés
-  </p>
+<p>
+اكتشف جديد المنتجات والعروض
+</p>
+
+<a
+href="https://www.instagram.com/similya_pro1/"
+target="_blank"
+>
+@similya_pro1
+</a>
+
+</section>
+
+
+<!-- FOOTER -->
+
+<footer id="contact">
+
+<p>
+<b>SIMILYA</b>
+— Santé • Beauté • Bien-être
+</p>
+
+<p>
+📱 WhatsApp:
+<b>0771849543</b>
+</p>
+
+<p>
+Instagram:
+<b>similya_pro1</b>
+</p>
 
 </footer>
 
 
-<a
-  class="whatsapp-float"
-  href="https://wa.me/212771849543"
-  target="_blank"
-  aria-label="WhatsApp"
->
-  ☎
-</a>
-
-
 <script>
 
+/* =========================
+   SUPABASE
+========================= */
+
 const SUPABASE_URL =
-  "https://kjrgjmcjpkoxnnccanip.supabase.co";
+"https://kjrgjmcjpkoxnnccanip.supabase.co";
 
 const SUPABASE_KEY =
-  "sb_publishable_aHnsiRvjTjfOlVYfd6vS3w_VqFL0gKd";
+"sb_publishable_aHnsiRvjTjfOlVYfd6vS3w_VqFL0gKd";
 
 const supabaseClient =
-  window.supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_KEY
-  );
+window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
 
 
-function orderProduct(productName, price){
+/* =========================
+   WHATSAPP
+========================= */
 
-  const phone = "212771849543";
-
-  const message =
-    "Bonjour SIMILYA 👋\n\n" +
-    "Je souhaite commander :\n" +
-    "Produit : " + productName + "\n" +
-    "Prix : " + price + " DH\n\n" +
-    "Merci.";
-
-  const url =
-    "https://wa.me/" +
-    phone +
-    "?text=" +
-    encodeURIComponent(message);
-
-  window.open(url, "_blank");
-}
+const WHATSAPP_NUMBER =
+"212771849543";
 
 
-function createProductCard(product){
-
-  const article =
-    document.createElement("article");
-
-  article.className = "product-card";
-
-  const image =
-    product.image_url ||
-    "https://via.placeholder.com/600x600?text=SIMILYA";
-
-  const benefits =
-    Array.isArray(product.benefits)
-      ? product.benefits
-      : [];
-
-  const benefitsHTML =
-    benefits
-      .map(
-        benefit =>
-          `<li>${escapeHTML(benefit)}</li>`
-      )
-      .join("");
-
-  const price =
-    Number(product.price)
-      .toLocaleString("fr-FR");
-
-  article.innerHTML = `
-
-    <img
-      class="product-image"
-      src="${escapeAttribute(image)}"
-      alt="${escapeAttribute(product.name)}"
-    >
-
-    <div class="product-content">
-
-      <div class="category">
-        ${escapeHTML(product.category || "")}
-      </div>
-
-      <div class="product-name">
-        ${escapeHTML(product.name)}
-      </div>
-
-      <div class="product-size">
-        ${escapeHTML(product.size || "")}
-      </div>
-
-      <ul class="benefits">
-        ${benefitsHTML}
-      </ul>
-
-      <div class="price">
-        ${price} DH
-      </div>
-
-      <button
-        class="order-btn"
-        type="button"
-      >
-        Commander sur WhatsApp
-      </button>
-
-    </div>
-  `;
-
-  article
-    .querySelector(".order-btn")
-    .addEventListener("click", () => {
-      orderProduct(product.name, price);
-    });
-
-  return article;
-}
-
-
-function escapeHTML(value){
-
-  return String(value ?? "")
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#039;");
-}
-
-
-function escapeAttribute(value){
-
-  return escapeHTML(value);
-}
-
+/* =========================
+   LOAD PRODUCTS
+========================= */
 
 async function loadProducts(){
 
   const grid =
     document.getElementById("productsGrid");
 
-  try{
+  grid.innerHTML =
+    `<div class="loading">
+      Chargement des produits...
+    </div>`;
 
-    const {
-      data,
-      error
-    } = await supabaseClient
+
+  const {
+    data,
+    error
+  } =
+    await supabaseClient
       .from("products")
       .select("*")
       .eq("active", true)
-      .order("id", { ascending:true });
+      .order("id", {
+        ascending:true
+      });
 
-    if(error){
-      throw error;
-    }
 
-    grid.innerHTML = "";
-
-    if(!data || data.length === 0){
-
-      grid.innerHTML = `
-        <div class="loading">
-          Aucun produit disponible pour le moment.
-        </div>
-      `;
-
-      return;
-    }
-
-    data.forEach(product => {
-
-      grid.appendChild(
-        createProductCard(product)
-      );
-
-    });
-
-  }catch(error){
+  if(error){
 
     console.error(error);
 
-    grid.innerHTML = `
-      <div class="error">
-        Impossible de charger les produits.
-        <br>
-        Veuillez réessayer plus tard.
-      </div>
-    `;
+    grid.innerHTML =
+      `<div class="error">
+        Une erreur est survenue lors du chargement des produits.
+      </div>`;
+
+    return;
   }
+
+
+  if(!data || data.length === 0){
+
+    grid.innerHTML =
+      `<div class="loading">
+        Aucun produit disponible pour le moment.
+      </div>`;
+
+    return;
+  }
+
+
+  grid.innerHTML = "";
+
+
+  data.forEach(product => {
+
+    const card =
+      document.createElement("article");
+
+    card.className =
+      "card";
+
+
+    const benefits =
+      Array.isArray(product.benefits)
+        ? product.benefits
+        : [];
+
+
+    /* =========================
+       PRICE
+    ========================= */
+
+    let priceHTML = "";
+
+
+    const hasSale =
+      product.sale_price !== null &&
+      product.sale_price !== undefined &&
+      product.sale_price !== "" &&
+      Number(product.sale_price) > 0 &&
+      Number(product.sale_price) < Number(product.price);
+
+
+    if(hasSale){
+
+      priceHTML = `
+
+        <div class="price-box">
+
+          <span class="old-price">
+            ${formatPrice(product.price)} DH
+          </span>
+
+          <span class="sale-price">
+            ${formatPrice(product.sale_price)} DH
+          </span>
+
+        </div>
+
+      `;
+
+    }else{
+
+      priceHTML = `
+
+        <div class="price-box">
+
+          <span class="normal-price">
+            ${formatPrice(product.price)} DH
+          </span>
+
+        </div>
+
+      `;
+
+    }
+
+
+    /* =========================
+       DISCOUNT BADGE
+    ========================= */
+
+    const discountBadge =
+      hasSale
+        ? `<div class="discount-badge">
+             PROMOTION
+           </div>`
+        : "";
+
+
+    /* =========================
+       BENEFITS
+    ========================= */
+
+    const benefitsHTML =
+      benefits
+        .map(item => {
+
+          return `
+            <li>
+              ✓ ${escapeHTML(item)}
+            </li>
+          `;
+
+        })
+        .join("");
+
+
+    /* =========================
+       WHATSAPP PRICE
+    ========================= */
+
+    const orderPrice =
+      hasSale
+        ? Number(product.sale_price)
+        : Number(product.price);
+
+
+    const message =
+      `Bonjour SIMILYA, je souhaite commander : ${product.name} au prix de ${orderPrice} DH.`;
+
+
+    const whatsappURL =
+      "https://wa.me/" +
+      WHATSAPP_NUMBER +
+      "?text=" +
+      encodeURIComponent(message);
+
+
+    /* =========================
+       CARD
+    ========================= */
+
+    card.innerHTML = `
+
+      <img
+        class="card-image"
+        src="${escapeHTML(product.image_url || "")}"
+        alt="${escapeHTML(product.name || "Produit SIMILYA")}"
+        loading="lazy"
+      >
+
+      <div class="card-body">
+
+        <div class="category">
+          ${escapeHTML(product.category || "SIMILYA")}
+        </div>
+
+        ${discountBadge}
+
+        <h3>
+          ${escapeHTML(product.name || "")}
+        </h3>
+
+        <div class="size">
+          ${escapeHTML(product.size || "")}
+        </div>
+
+        <ul class="benefits">
+          ${benefitsHTML}
+        </ul>
+
+        ${priceHTML}
+
+        <a
+          class="order"
+          href="${whatsappURL}"
+          target="_blank"
+        >
+          🟢 اطلب عبر WhatsApp
+        </a>
+
+      </div>
+
+    `;
+
+
+    grid.appendChild(card);
+
+  });
+
 }
 
+
+/* =========================
+   FORMAT PRICE
+========================= */
+
+function formatPrice(value){
+
+  const number =
+    Number(value);
+
+  if(!Number.isFinite(number)){
+    return "0";
+  }
+
+  return number.toLocaleString("fr-FR");
+
+}
+
+
+/* =========================
+   SECURITY
+========================= */
+
+function escapeHTML(value){
+
+  return String(value ?? "")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+
+/* =========================
+   START
+========================= */
 
 loadProducts();
 
 </script>
+
 
 </body>
 </html>
