@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
 
 <meta charset="UTF-8">
@@ -12,6 +13,10 @@ content="width=device-width, initial-scale=1.0">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
+
+/* =========================
+   GENERAL
+========================= */
 
 *{
   box-sizing:border-box;
@@ -28,14 +33,21 @@ body{
   color:#222;
 }
 
-/* HEADER */
+body.cart-open{
+  overflow:hidden;
+}
+
+
+/* =========================
+   HEADER
+========================= */
 
 header{
   background:#fff;
   border-bottom:1px solid #e5e5e5;
   position:sticky;
   top:0;
-  z-index:20;
+  z-index:100;
 }
 
 .nav{
@@ -69,6 +81,12 @@ nav a{
   font-weight:600;
 }
 
+.header-actions{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
 .nav-whatsapp{
   text-decoration:none;
   background:#168c3a;
@@ -78,7 +96,44 @@ nav a{
   font-weight:700;
 }
 
-/* HERO */
+
+/* =========================
+   CART BUTTON
+========================= */
+
+.cart-button{
+  position:relative;
+  border:0;
+  cursor:pointer;
+  background:#222;
+  color:#fff;
+  padding:10px 14px;
+  border-radius:9px;
+  font-size:15px;
+  font-weight:800;
+}
+
+.cart-count{
+  position:absolute;
+  top:-8px;
+  right:-8px;
+  min-width:22px;
+  height:22px;
+  padding:0 5px;
+  border-radius:50%;
+  background:#168c3a;
+  color:#fff;
+  font-size:12px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:800;
+}
+
+
+/* =========================
+   HERO
+========================= */
 
 .hero{
   max-width:1200px;
@@ -113,7 +168,10 @@ nav a{
   color:#666;
 }
 
-/* PRODUCTS */
+
+/* =========================
+   PRODUCTS
+========================= */
 
 .products-section{
   max-width:1200px;
@@ -142,7 +200,10 @@ nav a{
   gap:22px;
 }
 
-/* CARD */
+
+/* =========================
+   PRODUCT CARD
+========================= */
 
 .card{
   background:#fff;
@@ -202,7 +263,10 @@ nav a{
   margin-bottom:3px;
 }
 
-/* PRICE */
+
+/* =========================
+   PRICE
+========================= */
 
 .price-box{
   margin-top:auto;
@@ -232,26 +296,53 @@ nav a{
   font-weight:800;
 }
 
-/* ORDER BUTTON */
 
-.order{
+/* =========================
+   PROMOTION
+========================= */
+
+.discount-badge{
+  display:inline-block;
+  background:#f3dddd;
+  color:#a32929;
+  font-size:11px;
+  font-weight:800;
+  padding:5px 9px;
+  border-radius:20px;
+  margin-bottom:10px;
+}
+
+
+/* =========================
+   ADD TO CART
+========================= */
+
+.add-cart{
   display:block;
   width:100%;
-  text-align:center;
-  background:#168c3a;
+  border:0;
+  cursor:pointer;
+  background:#222;
   color:white;
-  text-decoration:none;
   padding:13px 12px;
   border-radius:10px;
   font-weight:800;
+  font-size:15px;
   transition:.2s;
 }
 
-.order:hover{
+.add-cart:hover{
   opacity:.9;
 }
 
-/* LOADING */
+.add-cart.added{
+  background:#168c3a;
+}
+
+
+/* =========================
+   LOADING / ERROR
+========================= */
 
 .loading{
   grid-column:1/-1;
@@ -268,7 +359,10 @@ nav a{
   color:#b00020;
 }
 
-/* INSTAGRAM */
+
+/* =========================
+   INSTAGRAM
+========================= */
 
 .instagram{
   background:#fff;
@@ -298,7 +392,10 @@ nav a{
   font-weight:700;
 }
 
-/* FOOTER */
+
+/* =========================
+   FOOTER
+========================= */
 
 footer{
   background:#222;
@@ -316,7 +413,209 @@ footer b{
   color:white;
 }
 
-/* RESPONSIVE */
+
+/* =========================
+   CART OVERLAY
+========================= */
+
+.cart-overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.45);
+  z-index:200;
+  display:none;
+}
+
+.cart-overlay.show{
+  display:block;
+}
+
+
+/* =========================
+   CART PANEL
+========================= */
+
+.cart-panel{
+  position:fixed;
+  top:0;
+  right:-460px;
+  width:440px;
+  max-width:100%;
+  height:100vh;
+  background:#fff;
+  z-index:210;
+  display:flex;
+  flex-direction:column;
+  transition:right .25s ease;
+  box-shadow:-5px 0 25px rgba(0,0,0,.15);
+}
+
+.cart-panel.open{
+  right:0;
+}
+
+.cart-header{
+  padding:20px;
+  border-bottom:1px solid #ddd;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+}
+
+.cart-header h2{
+  margin:0;
+  font-size:23px;
+}
+
+.close-cart{
+  border:0;
+  background:#eee;
+  width:38px;
+  height:38px;
+  border-radius:50%;
+  cursor:pointer;
+  font-size:20px;
+}
+
+
+/* =========================
+   CART CONTENT
+========================= */
+
+.cart-content{
+  flex:1;
+  overflow-y:auto;
+  padding:15px 20px;
+}
+
+.empty-cart{
+  text-align:center;
+  color:#777;
+  padding:60px 20px;
+}
+
+.cart-item{
+  display:flex;
+  gap:12px;
+  padding:15px 0;
+  border-bottom:1px solid #eee;
+}
+
+.cart-item-image{
+  width:75px;
+  height:75px;
+  border-radius:9px;
+  object-fit:cover;
+  background:#eee;
+  flex-shrink:0;
+}
+
+.cart-item-info{
+  flex:1;
+  min-width:0;
+}
+
+.cart-item-name{
+  font-weight:800;
+  font-size:15px;
+  margin-bottom:5px;
+}
+
+.cart-item-price{
+  font-size:14px;
+  color:#168c3a;
+  font-weight:700;
+  margin-bottom:9px;
+}
+
+.cart-item-controls{
+  display:flex;
+  align-items:center;
+  gap:7px;
+}
+
+.quantity-button{
+  border:0;
+  background:#eee;
+  width:30px;
+  height:30px;
+  border-radius:7px;
+  cursor:pointer;
+  font-size:18px;
+  font-weight:700;
+}
+
+.quantity{
+  min-width:25px;
+  text-align:center;
+  font-weight:800;
+}
+
+.remove-item{
+  border:0;
+  background:transparent;
+  color:#b00020;
+  cursor:pointer;
+  font-size:12px;
+  margin-left:8px;
+}
+
+
+/* =========================
+   CART FOOTER
+========================= */
+
+.cart-footer{
+  border-top:1px solid #ddd;
+  padding:18px 20px;
+  background:#fff;
+}
+
+.cart-total{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:15px;
+  font-size:18px;
+  font-weight:800;
+}
+
+.total-value{
+  color:#168c3a;
+  font-size:24px;
+}
+
+.whatsapp-order{
+  display:block;
+  width:100%;
+  border:0;
+  cursor:pointer;
+  background:#168c3a;
+  color:#fff;
+  padding:15px;
+  border-radius:10px;
+  font-size:16px;
+  font-weight:800;
+}
+
+.clear-cart{
+  display:block;
+  width:100%;
+  border:0;
+  cursor:pointer;
+  background:#eee;
+  color:#b00020;
+  padding:11px;
+  border-radius:10px;
+  font-weight:700;
+  margin-top:8px;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
 
 @media(max-width:1000px){
 
@@ -329,6 +628,7 @@ footer b{
   }
 
 }
+
 
 @media(max-width:600px){
 
@@ -345,8 +645,16 @@ footer b{
   }
 
   .nav-whatsapp{
-    font-size:13px;
-    padding:9px 11px;
+    display:none;
+  }
+
+  .header-actions{
+    margin-left:auto;
+  }
+
+  .cart-button{
+    font-size:14px;
+    padding:9px 12px;
   }
 
   .hero{
@@ -374,29 +682,56 @@ footer b{
     height:300px;
   }
 
+  .cart-panel{
+    width:100%;
+    right:-100%;
+  }
+
 }
 
-/* DISCOUNT BADGE */
 
-.discount-badge{
-  display:inline-block;
-  background:#f3dddd;
-  color:#a32929;
-  font-size:11px;
-  font-weight:800;
-  padding:5px 9px;
-  border-radius:20px;
+/* =========================
+   CUSTOMER INFO
+========================= */
+
+.customer-box{
+  margin-bottom:15px;
+}
+
+.customer-box label{
+  display:block;
+  font-size:13px;
+  font-weight:700;
+  margin-bottom:6px;
+}
+
+.customer-box input,
+.customer-box textarea{
+  width:100%;
+  border:1px solid #ccc;
+  border-radius:8px;
+  padding:11px;
+  font-size:14px;
+  font-family:Arial,Helvetica,sans-serif;
   margin-bottom:10px;
+}
+
+.customer-box textarea{
+  min-height:70px;
+  resize:vertical;
 }
 
 </style>
 
 </head>
 
+
 <body>
 
 
-<!-- HEADER -->
+<!-- =========================
+     HEADER
+========================= -->
 
 <header>
 
@@ -405,6 +740,7 @@ footer b{
 <div class="logo">
 SIMIL<span>Y</span>A
 </div>
+
 
 <nav>
 
@@ -422,6 +758,25 @@ Instagram
 
 </nav>
 
+
+<div class="header-actions">
+
+<button
+class="cart-button"
+onclick="openCart()"
+>
+🛒 حقيبتي
+
+<span
+id="cartCount"
+class="cart-count"
+>
+0
+</span>
+
+</button>
+
+
 <a
 class="nav-whatsapp"
 href="https://wa.me/212771849543"
@@ -432,10 +787,14 @@ WhatsApp
 
 </div>
 
+</div>
+
 </header>
 
 
-<!-- HERO -->
+<!-- =========================
+     HERO
+========================= -->
 
 <section class="hero">
 
@@ -456,7 +815,9 @@ SANTÉ • BEAUTÉ • BIEN-ÊTRE
 </section>
 
 
-<!-- PRODUCTS -->
+<!-- =========================
+     PRODUCTS
+========================= -->
 
 <section
 class="products-section"
@@ -470,10 +831,11 @@ id="products"
 </h2>
 
 <p>
-اكتشف مجموعة منتجات SIMILYA
+اختار المنتجات اللي بغيتي وزيدها لحقيبة المشتريات
 </p>
 
 </div>
+
 
 <div
 id="productsGrid"
@@ -489,7 +851,9 @@ Chargement des produits...
 </section>
 
 
-<!-- INSTAGRAM -->
+<!-- =========================
+     INSTAGRAM
+========================= -->
 
 <section
 class="instagram"
@@ -514,7 +878,9 @@ target="_blank"
 </section>
 
 
-<!-- FOOTER -->
+<!-- =========================
+     FOOTER
+========================= -->
 
 <footer id="contact">
 
@@ -534,6 +900,130 @@ Instagram:
 </p>
 
 </footer>
+
+
+<!-- =========================
+     CART OVERLAY
+========================= -->
+
+<div
+id="cartOverlay"
+class="cart-overlay"
+onclick="closeCart()"
+>
+</div>
+
+
+<!-- =========================
+     CART PANEL
+========================= -->
+
+<aside
+id="cartPanel"
+class="cart-panel"
+>
+
+<div class="cart-header">
+
+<h2>
+🛒 حقيبة المشتريات
+</h2>
+
+<button
+class="close-cart"
+onclick="closeCart()"
+>
+×
+</button>
+
+</div>
+
+
+<div
+class="cart-content"
+id="cartContent"
+>
+
+<div class="empty-cart">
+الحقيبة فارغة حالياً.
+</div>
+
+</div>
+
+
+<div class="cart-footer">
+
+
+<div class="customer-box">
+
+<label>
+الاسم
+</label>
+
+<input
+id="customerName"
+type="text"
+placeholder="الاسم الكامل"
+>
+
+
+<label>
+المدينة
+</label>
+
+<input
+id="customerCity"
+type="text"
+placeholder="مثال: Agadir"
+>
+
+
+<label>
+العنوان — اختياري
+</label>
+
+<textarea
+id="customerAddress"
+placeholder="العنوان بالتفصيل"
+></textarea>
+
+</div>
+
+
+<div class="cart-total">
+
+<span>
+المجموع
+</span>
+
+<span
+id="cartTotal"
+class="total-value"
+>
+0 DH
+</span>
+
+</div>
+
+
+<button
+class="whatsapp-order"
+onclick="sendOrderWhatsApp()"
+>
+🟢 إرسال الطلب عبر WhatsApp
+</button>
+
+
+<button
+class="clear-cart"
+onclick="clearCart()"
+>
+إفراغ الحقيبة
+</button>
+
+</div>
+
+</aside>
 
 
 <script>
@@ -564,6 +1054,13 @@ const WHATSAPP_NUMBER =
 
 
 /* =========================
+   CART
+========================= */
+
+let cart = [];
+
+
+/* =========================
    LOAD PRODUCTS
 ========================= */
 
@@ -582,13 +1079,13 @@ async function loadProducts(){
     data,
     error
   } =
-    await supabaseClient
-      .from("products")
-      .select("*")
-      .eq("active", true)
-      .order("id", {
-        ascending:true
-      });
+  await supabaseClient
+    .from("products")
+    .select("*")
+    .eq("active", true)
+    .order("id", {
+      ascending:true
+    });
 
 
   if(error){
@@ -634,11 +1131,8 @@ async function loadProducts(){
 
 
     /* =========================
-       PRICE
+       SALE PRICE
     ========================= */
-
-    let priceHTML = "";
-
 
     const hasSale =
       product.sale_price !== null &&
@@ -646,6 +1140,15 @@ async function loadProducts(){
       product.sale_price !== "" &&
       Number(product.sale_price) > 0 &&
       Number(product.sale_price) < Number(product.price);
+
+
+    const currentPrice =
+      hasSale
+        ? Number(product.sale_price)
+        : Number(product.price);
+
+
+    let priceHTML = "";
 
 
     if(hasSale){
@@ -683,10 +1186,6 @@ async function loadProducts(){
     }
 
 
-    /* =========================
-       DISCOUNT BADGE
-    ========================= */
-
     const discountBadge =
       hasSale
         ? `<div class="discount-badge">
@@ -694,10 +1193,6 @@ async function loadProducts(){
            </div>`
         : "";
 
-
-    /* =========================
-       BENEFITS
-    ========================= */
 
     const benefitsHTML =
       benefits
@@ -712,31 +1207,6 @@ async function loadProducts(){
         })
         .join("");
 
-
-    /* =========================
-       WHATSAPP PRICE
-    ========================= */
-
-    const orderPrice =
-      hasSale
-        ? Number(product.sale_price)
-        : Number(product.price);
-
-
-    const message =
-      `Bonjour SIMILYA, je souhaite commander : ${product.name} au prix de ${orderPrice} DH.`;
-
-
-    const whatsappURL =
-      "https://wa.me/" +
-      WHATSAPP_NUMBER +
-      "?text=" +
-      encodeURIComponent(message);
-
-
-    /* =========================
-       CARD
-    ========================= */
 
     card.innerHTML = `
 
@@ -769,13 +1239,13 @@ async function loadProducts(){
 
         ${priceHTML}
 
-        <a
-          class="order"
-          href="${whatsappURL}"
-          target="_blank"
+        <button
+          class="add-cart"
+          id="add-${product.id}"
+          onclick="addToCart(${product.id})"
         >
-          🟢 اطلب عبر WhatsApp
-        </a>
+          🛒 أضف إلى الحقيبة
+        </button>
 
       </div>
 
@@ -790,6 +1260,602 @@ async function loadProducts(){
 
 
 /* =========================
+   FIND CURRENT PRICE
+========================= */
+
+function getProductPrice(product){
+
+  const sale =
+    Number(product.sale_price);
+
+  const original =
+    Number(product.price);
+
+
+  if(
+    Number.isFinite(sale) &&
+    sale > 0 &&
+    sale < original
+  ){
+
+    return sale;
+
+  }
+
+
+  return original;
+
+}
+
+
+/* =========================
+   ADD TO CART
+========================= */
+
+function addToCart(productId){
+
+  const button =
+    document.getElementById(
+      "add-" + productId
+    );
+
+
+  /*
+    نجيب المنتج من الكارت الموجود
+    فالواجهة، وإذا ما كانش نبحث عليه
+    في البطاقات/البيانات.
+  */
+
+  const productCard =
+    button
+      ? button.closest(".card")
+      : null;
+
+
+  /*
+    نستعمل نسخة المنتج المخزنة
+    في window.similyaProducts.
+  */
+
+  const product =
+    window.similyaProducts
+      ? window.similyaProducts.find(
+          item => Number(item.id) === Number(productId)
+        )
+      : null;
+
+
+  if(!product){
+
+    alert(
+      "تعذر إضافة المنتج. يرجى إعادة تحميل الصفحة."
+    );
+
+    return;
+  }
+
+
+  const existing =
+    cart.find(
+      item =>
+        Number(item.id) === Number(productId)
+    );
+
+
+  if(existing){
+
+    existing.quantity += 1;
+
+  }else{
+
+    cart.push({
+
+      id:product.id,
+
+      name:product.name,
+
+      price:Number(product.price),
+
+      sale_price:
+        product.sale_price !== null &&
+        product.sale_price !== undefined &&
+        product.sale_price !== ""
+          ? Number(product.sale_price)
+          : null,
+
+      image_url:product.image_url || "",
+
+      size:product.size || "",
+
+      quantity:1
+
+    });
+
+  }
+
+
+  updateCart();
+
+
+  openCart();
+
+
+  if(button){
+
+    const oldText =
+      button.innerHTML;
+
+    button.innerHTML =
+      "✓ تمت الإضافة";
+
+    button.classList.add("added");
+
+
+    setTimeout(() => {
+
+      button.innerHTML =
+        oldText;
+
+      button.classList.remove("added");
+
+    },1200);
+
+  }
+
+}
+
+
+/* =========================
+   CART PRICE
+========================= */
+
+function getCartItemPrice(item){
+
+  const original =
+    Number(item.price);
+
+  const sale =
+    Number(item.sale_price);
+
+
+  if(
+    Number.isFinite(sale) &&
+    sale > 0 &&
+    sale < original
+  ){
+
+    return sale;
+
+  }
+
+
+  return original;
+
+}
+
+
+/* =========================
+   UPDATE CART
+========================= */
+
+function updateCart(){
+
+  const content =
+    document.getElementById("cartContent");
+
+  const countElement =
+    document.getElementById("cartCount");
+
+  const totalElement =
+    document.getElementById("cartTotal");
+
+
+  const totalQuantity =
+    cart.reduce(
+      (sum,item) =>
+        sum + item.quantity,
+      0
+    );
+
+
+  countElement.textContent =
+    totalQuantity;
+
+
+  if(cart.length === 0){
+
+    content.innerHTML = `
+
+      <div class="empty-cart">
+        الحقيبة فارغة حالياً.
+      </div>
+
+    `;
+
+    totalElement.textContent =
+      "0 DH";
+
+    return;
+  }
+
+
+  let total = 0;
+
+
+  content.innerHTML = "";
+
+
+  cart.forEach(item => {
+
+    const unitPrice =
+      getCartItemPrice(item);
+
+
+    const itemTotal =
+      unitPrice * item.quantity;
+
+
+    total += itemTotal;
+
+
+    const itemElement =
+      document.createElement("div");
+
+    itemElement.className =
+      "cart-item";
+
+
+    itemElement.innerHTML = `
+
+      <img
+        class="cart-item-image"
+        src="${escapeHTML(item.image_url)}"
+        alt="${escapeHTML(item.name)}"
+      >
+
+      <div class="cart-item-info">
+
+        <div class="cart-item-name">
+          ${escapeHTML(item.name)}
+        </div>
+
+        <div class="cart-item-price">
+
+          ${formatPrice(unitPrice)} DH
+          ×
+          ${item.quantity}
+
+          =
+          ${formatPrice(itemTotal)} DH
+
+        </div>
+
+
+        <div class="cart-item-controls">
+
+          <button
+            class="quantity-button"
+            onclick="changeQuantity(${item.id},-1)"
+          >
+            −
+          </button>
+
+          <span class="quantity">
+            ${item.quantity}
+          </span>
+
+          <button
+            class="quantity-button"
+            onclick="changeQuantity(${item.id},1)"
+          >
+            +
+          </button>
+
+          <button
+            class="remove-item"
+            onclick="removeFromCart(${item.id})"
+          >
+            حذف
+          </button>
+
+        </div>
+
+      </div>
+
+    `;
+
+
+    content.appendChild(itemElement);
+
+  });
+
+
+  totalElement.textContent =
+    formatPrice(total) + " DH";
+
+}
+
+
+/* =========================
+   CHANGE QUANTITY
+========================= */
+
+function changeQuantity(
+  productId,
+  amount
+){
+
+  const item =
+    cart.find(
+      item =>
+        Number(item.id) === Number(productId)
+    );
+
+
+  if(!item){
+    return;
+  }
+
+
+  item.quantity += amount;
+
+
+  if(item.quantity <= 0){
+
+    cart =
+      cart.filter(
+        item =>
+          Number(item.id) !== Number(productId)
+      );
+
+  }
+
+
+  updateCart();
+
+}
+
+
+/* =========================
+   REMOVE ITEM
+========================= */
+
+function removeFromCart(productId){
+
+  cart =
+    cart.filter(
+      item =>
+        Number(item.id) !== Number(productId)
+    );
+
+
+  updateCart();
+
+}
+
+
+/* =========================
+   CLEAR CART
+========================= */
+
+function clearCart(){
+
+  if(cart.length === 0){
+    return;
+  }
+
+
+  const confirmed =
+    confirm(
+      "هل تريد إفراغ حقيبة المشتريات؟"
+    );
+
+
+  if(!confirmed){
+    return;
+  }
+
+
+  cart = [];
+
+
+  updateCart();
+
+}
+
+
+/* =========================
+   OPEN CART
+========================= */
+
+function openCart(){
+
+  document
+    .getElementById("cartPanel")
+    .classList.add("open");
+
+
+  document
+    .getElementById("cartOverlay")
+    .classList.add("show");
+
+
+  document.body.classList.add("cart-open");
+
+}
+
+
+/* =========================
+   CLOSE CART
+========================= */
+
+function closeCart(){
+
+  document
+    .getElementById("cartPanel")
+    .classList.remove("open");
+
+
+  document
+    .getElementById("cartOverlay")
+    .classList.remove("show");
+
+
+  document.body.classList.remove("cart-open");
+
+}
+
+
+/* =========================
+   SEND ORDER WHATSAPP
+========================= */
+
+function sendOrderWhatsApp(){
+
+  if(cart.length === 0){
+
+    alert(
+      "حقيبة المشتريات فارغة."
+    );
+
+    return;
+  }
+
+
+  const name =
+    document
+      .getElementById("customerName")
+      .value
+      .trim();
+
+
+  const city =
+    document
+      .getElementById("customerCity")
+      .value
+      .trim();
+
+
+  const address =
+    document
+      .getElementById("customerAddress")
+      .value
+      .trim();
+
+
+  if(!name){
+
+    alert(
+      "من فضلك أدخل الاسم."
+    );
+
+    document
+      .getElementById("customerName")
+      .focus();
+
+    return;
+  }
+
+
+  if(!city){
+
+    alert(
+      "من فضلك أدخل المدينة."
+    );
+
+    document
+      .getElementById("customerCity")
+      .focus();
+
+    return;
+  }
+
+
+  let total = 0;
+
+
+  let message =
+`🛍️ *طلب جديد من SIMILYA*
+
+👤 الاسم: ${name}
+📍 المدينة: ${city}`;
+
+
+  if(address){
+
+    message +=
+      `\n🏠 العنوان: ${address}`;
+
+  }
+
+
+  message +=
+    `\n\n📦 *المنتجات:*`;
+
+
+  cart.forEach((item,index) => {
+
+    const unitPrice =
+      getCartItemPrice(item);
+
+
+    const itemTotal =
+      unitPrice * item.quantity;
+
+
+    total += itemTotal;
+
+
+    message +=
+      `\n\n${index + 1}. ${item.name}`;
+
+
+    if(item.size){
+
+      message +=
+        ` (${item.size})`;
+
+    }
+
+
+    message +=
+      `\n   الكمية: ${item.quantity}`;
+
+
+    message +=
+      `\n   الثمن: ${formatPrice(unitPrice)} DH`;
+
+
+    message +=
+      `\n   المجموع: ${formatPrice(itemTotal)} DH`;
+
+  });
+
+
+  message +=
+    `\n\n💰 *المجموع الكلي: ${formatPrice(total)} DH*`;
+
+
+  message +=
+    `\n\nشكراً لاختياركم SIMILYA ❤️`;
+
+
+  const url =
+    "https://wa.me/" +
+    WHATSAPP_NUMBER +
+    "?text=" +
+    encodeURIComponent(message);
+
+
+  window.open(
+    url,
+    "_blank"
+  );
+
+}
+
+
+/* =========================
    FORMAT PRICE
 ========================= */
 
@@ -798,17 +1864,21 @@ function formatPrice(value){
   const number =
     Number(value);
 
+
   if(!Number.isFinite(number)){
     return "0";
   }
 
-  return number.toLocaleString("fr-FR");
+
+  return number.toLocaleString(
+    "fr-FR"
+  );
 
 }
 
 
 /* =========================
-   SECURITY
+   ESCAPE HTML
 ========================= */
 
 function escapeHTML(value){
@@ -824,13 +1894,217 @@ function escapeHTML(value){
 
 
 /* =========================
+   LOAD PRODUCTS + SAVE
+   THEM FOR CART
+========================= */
+
+async function initializeProducts(){
+
+  const grid =
+    document.getElementById("productsGrid");
+
+
+  grid.innerHTML =
+    `<div class="loading">
+      Chargement des produits...
+    </div>`;
+
+
+  const {
+    data,
+    error
+  } =
+  await supabaseClient
+    .from("products")
+    .select("*")
+    .eq("active", true)
+    .order("id", {
+      ascending:true
+    });
+
+
+  if(error){
+
+    console.error(error);
+
+    grid.innerHTML =
+      `<div class="error">
+        Une erreur est survenue lors du chargement des produits.
+      </div>`;
+
+    return;
+  }
+
+
+  if(!data || data.length === 0){
+
+    grid.innerHTML =
+      `<div class="loading">
+        Aucun produit disponible pour le moment.
+      </div>`;
+
+    return;
+  }
+
+
+  /*
+    نخزنو المنتجات هنا فقط
+    باش زر "أضف إلى الحقيبة"
+    يلقى المعلومات ديال المنتج.
+  */
+
+  window.similyaProducts =
+    data;
+
+
+  grid.innerHTML = "";
+
+
+  data.forEach(product => {
+
+    const card =
+      document.createElement("article");
+
+    card.className =
+      "card";
+
+
+    const benefits =
+      Array.isArray(product.benefits)
+        ? product.benefits
+        : [];
+
+
+    const hasSale =
+      product.sale_price !== null &&
+      product.sale_price !== undefined &&
+      product.sale_price !== "" &&
+      Number(product.sale_price) > 0 &&
+      Number(product.sale_price) < Number(product.price);
+
+
+    let priceHTML = "";
+
+
+    if(hasSale){
+
+      priceHTML = `
+
+        <div class="price-box">
+
+          <span class="old-price">
+            ${formatPrice(product.price)} DH
+          </span>
+
+          <span class="sale-price">
+            ${formatPrice(product.sale_price)} DH
+          </span>
+
+        </div>
+
+      `;
+
+    }else{
+
+      priceHTML = `
+
+        <div class="price-box">
+
+          <span class="normal-price">
+            ${formatPrice(product.price)} DH
+          </span>
+
+        </div>
+
+      `;
+
+    }
+
+
+    const discountBadge =
+      hasSale
+        ? `<div class="discount-badge">
+             PROMOTION
+           </div>`
+        : "";
+
+
+    const benefitsHTML =
+      benefits
+        .map(item => {
+
+          return `
+            <li>
+              ✓ ${escapeHTML(item)}
+            </li>
+          `;
+
+        })
+        .join("");
+
+
+    card.innerHTML = `
+
+      <img
+        class="card-image"
+        src="${escapeHTML(product.image_url || "")}"
+        alt="${escapeHTML(product.name || "Produit SIMILYA")}"
+        loading="lazy"
+      >
+
+      <div class="card-body">
+
+        <div class="category">
+          ${escapeHTML(product.category || "SIMILYA")}
+        </div>
+
+        ${discountBadge}
+
+        <h3>
+          ${escapeHTML(product.name || "")}
+        </h3>
+
+        <div class="size">
+          ${escapeHTML(product.size || "")}
+        </div>
+
+        <ul class="benefits">
+          ${benefitsHTML}
+        </ul>
+
+        ${priceHTML}
+
+        <button
+          class="add-cart"
+          id="add-${product.id}"
+          onclick="addToCart(${product.id})"
+        >
+          🛒 أضف إلى الحقيبة
+        </button>
+
+      </div>
+
+    `;
+
+
+    grid.appendChild(card);
+
+  });
+
+}
+
+
+/* =========================
    START
 ========================= */
 
-loadProducts();
+initializeProducts();
+
+updateCart();
 
 </script>
 
 
 </body>
+
 </html>
