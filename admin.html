@@ -247,9 +247,6 @@ label{
   </div>
 </header>
 
-
-<!-- LOGIN -->
-
 <div id="loginPage" class="container">
 
   <div class="login-box">
@@ -283,9 +280,6 @@ label{
 
 </div>
 
-
-<!-- ADMIN -->
-
 <div id="adminPage" class="container hidden">
 
   <div id="formBox" class="form-box hidden">
@@ -305,9 +299,7 @@ label{
 
     </div>
 
-
     <input id="productId" type="hidden">
-
 
     <label>Nom du produit</label>
     <input
@@ -316,8 +308,7 @@ label{
       placeholder="Ex: Crème solaire SPF 50+"
     >
 
-
-    <label>Prix (DH)</label>
+    <label>Prix original (DH)</label>
     <input
       id="price"
       type="number"
@@ -325,6 +316,13 @@ label{
       placeholder="190"
     >
 
+    <label>Prix promotionnel (DH) — optionnel</label>
+    <input
+      id="salePrice"
+      type="number"
+      step="0.01"
+      placeholder="170 (laisser vide sans réduction)"
+    >
 
     <label>Catégorie</label>
     <input
@@ -333,14 +331,12 @@ label{
       placeholder="SOLAIRE"
     >
 
-
     <label>Volume / taille</label>
     <input
       id="size"
       type="text"
       placeholder="50 ml"
     >
-
 
     <label>Image du produit</label>
     <input
@@ -363,7 +359,6 @@ label{
       >
     </div>
 
-
     <label>
       Avantages — un avantage par ligne
     </label>
@@ -372,7 +367,6 @@ label{
       id="benefits"
       placeholder="Protection UV large spectre&#10;Hydrate la peau&#10;Prévient le vieillissement"
     ></textarea>
-
 
     <button
       class="primary"
@@ -385,20 +379,17 @@ label{
 
   </div>
 
-
   <div class="form-title" style="margin-top:30px">
 
     <h1>Produits</h1>
 
   </div>
 
-
   <div id="products" class="products">
     Chargement...
   </div>
 
 </div>
-
 
 <script>
 
@@ -531,6 +522,9 @@ function showForm(product=null){
     document.getElementById("price")
       .value = product.price || "";
 
+    document.getElementById("salePrice")
+      .value = product.sale_price ?? "";
+
     document.getElementById("category")
       .value = product.category || "";
 
@@ -563,6 +557,9 @@ function showForm(product=null){
       .value = "";
 
     document.getElementById("price")
+      .value = "";
+
+    document.getElementById("salePrice")
       .value = "";
 
     document.getElementById("category")
@@ -710,6 +707,12 @@ async function saveProduct(){
   const price =
     Number(document.getElementById("price").value);
 
+  const salePriceRaw =
+    document.getElementById("salePrice").value.trim();
+
+  const sale_price =
+    salePriceRaw === "" ? null : Number(salePriceRaw);
+
   const category =
     document.getElementById("category").value.trim();
 
@@ -733,8 +736,21 @@ async function saveProduct(){
   if(!name || !price){
 
     message.textContent =
-      "Le nom et le prix sont obligatoires.";
+      "Le nom et le prix original sont obligatoires.";
 
+    return;
+  }
+
+  if(
+    sale_price !== null &&
+    (
+      !Number.isFinite(sale_price) ||
+      sale_price <= 0 ||
+      sale_price >= price
+    )
+  ){
+    message.textContent =
+      "Le prix promotionnel doit être inférieur au prix original.";
     return;
   }
 
@@ -771,6 +787,7 @@ async function saveProduct(){
   const product = {
     name,
     price,
+    sale_price,
     category,
     size,
     image_url,
@@ -896,7 +913,20 @@ async function loadProducts(){
         </div>
 
         <div class="product-price">
-          ${Number(product.price).toLocaleString("fr-FR")} DH
+          ${
+            product.sale_price !== null &&
+            product.sale_price !== undefined &&
+            product.sale_price !== ""
+            ?
+            `<span style="text-decoration:line-through;color:#999;font-weight:400;margin-right:8px">
+              ${Number(product.price).toLocaleString("fr-FR")} DH
+            </span>
+            <strong>
+              ${Number(product.sale_price).toLocaleString("fr-FR")} DH
+            </strong>`
+            :
+            `${Number(product.price).toLocaleString("fr-FR")} DH`
+          }
         </div>
 
         <div style="font-size:13px;color:#777">
