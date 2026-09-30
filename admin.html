@@ -382,8 +382,11 @@ label{
     </button>
 
     <div id="formMessage" class="message"></div>
-    
-<div class="form-title" style="margin-top:30px">
+
+  </div>
+
+
+  <div class="form-title" style="margin-top:30px">
 
     <h1>Produits</h1>
 
@@ -689,9 +692,9 @@ document
 
     showImagePreview(url);
   });
-  </div>
 
-  async function saveProduct(){
+
+async function saveProduct(){
 
   const message =
     document.getElementById("formMessage");
@@ -735,7 +738,6 @@ document
     return;
   }
 
-
   if(!id && !imageFile && !image_url){
 
     message.textContent =
@@ -743,7 +745,6 @@ document
 
     return;
   }
-
 
   try{
 
@@ -929,7 +930,8 @@ async function loadProducts(){
   });
 }
 
-  function editProduct(product){
+
+function editProduct(product){
 
   showForm(product);
 }
