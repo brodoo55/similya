@@ -1,893 +1,659 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>SIMILYA — Santé • Beauté • Bien-être</title>
+<title>SIMILYA — Santé • Beauté • Bien-être</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      background: #f8f7f4;
-      color: #222;
-    }
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
 
-    a {
-      text-decoration: none;
-    }
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  background:#f8f7f4;
+  color:#222;
+}
 
-    /* HEADER */
-    header {
-      background: #fff;
-      border-bottom: 1px solid #e8e5df;
-      padding: 18px 20px;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-    }
+a{text-decoration:none}
 
-    .header-inner {
-      max-width: 1200px;
-      margin: auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
+header{
+  background:#fff;
+  border-bottom:1px solid #e8e5df;
+  padding:18px 20px;
+  position:sticky;
+  top:0;
+  z-index:1000;
+}
 
-    .logo {
-      font-size: 27px;
-      font-weight: 700;
-      letter-spacing: 3px;
-    }
+.header-inner{
+  max-width:1200px;
+  margin:auto;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
 
-    .tagline {
-      font-size: 10px;
-      letter-spacing: 2px;
-      color: #777;
-      margin-top: 2px;
-    }
+.logo{
+  font-size:27px;
+  font-weight:700;
+  letter-spacing:3px;
+}
 
-    nav {
-      display: flex;
-      gap: 20px;
-    }
+.tagline{
+  font-size:10px;
+  letter-spacing:2px;
+  color:#777;
+  margin-top:2px;
+}
 
-    nav a {
-      color: #333;
-      font-size: 14px;
-      font-weight: 600;
-    }
+nav{
+  display:flex;
+  gap:20px;
+}
 
-    /* HERO */
-    .hero {
-      max-width: 1200px;
-      margin: auto;
-      padding: 70px 20px 50px;
-      text-align: center;
-    }
+nav a{
+  color:#333;
+  font-size:14px;
+  font-weight:600;
+}
 
-    .hero h1 {
-      font-size: clamp(34px, 6vw, 58px);
-      font-weight: 500;
-      margin-bottom: 18px;
-    }
+.hero{
+  max-width:1200px;
+  margin:auto;
+  padding:70px 20px 50px;
+  text-align:center;
+}
 
-    .hero p {
-      max-width: 700px;
-      margin: auto;
-      color: #666;
-      font-size: 16px;
-      line-height: 1.7;
-    }
+.hero h1{
+  font-size:clamp(34px,6vw,58px);
+  font-weight:500;
+  margin-bottom:18px;
+}
 
-    /* PRODUCTS */
-    .products-section {
-      max-width: 1200px;
-      margin: auto;
-      padding: 10px 20px 70px;
-    }
+.hero p{
+  max-width:700px;
+  margin:auto;
+  color:#666;
+  font-size:16px;
+  line-height:1.7;
+}
 
-    .section-title {
-      text-align: center;
-      margin-bottom: 35px;
-    }
+.products-section{
+  max-width:1200px;
+  margin:auto;
+  padding:10px 20px 70px;
+}
 
-    .section-title h2 {
-      font-size: 32px;
-      font-weight: 500;
-      margin-bottom: 10px;
-    }
+.section-title{
+  text-align:center;
+  margin-bottom:35px;
+}
 
-    .section-title p {
-      color: #777;
-      font-size: 14px;
-    }
+.section-title h2{
+  font-size:32px;
+  font-weight:500;
+  margin-bottom:10px;
+}
 
-    .products-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 24px;
-    }
+.section-title p{
+  color:#777;
+  font-size:14px;
+}
 
-    /* CARD */
-    .product-card {
-      background: #fff;
-      border: 1px solid #e5e2dc;
-      border-radius: 14px;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-    }
+.products-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:24px;
+}
 
-    .product-image {
-      width: 100%;
-      aspect-ratio: 1 / 1;
-      object-fit: cover;
-      display: block;
-      background: #f1f0ed;
-    }
+.product-card{
+  background:#fff;
+  border:1px solid #e5e2dc;
+  border-radius:14px;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+}
 
-    .product-content {
-      padding: 18px;
-      display: flex;
-      flex-direction: column;
-      flex: 1;
-    }
+.product-image{
+  width:100%;
+  aspect-ratio:1/1;
+  object-fit:cover;
+  display:block;
+  background:#f1f0ed;
+}
 
-    .category {
-      color: #8f6d4d;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 1.3px;
-      margin-bottom: 8px;
-    }
+.product-content{
+  padding:18px;
+  display:flex;
+  flex-direction:column;
+  flex:1;
+}
 
-    .product-name {
-      font-size: 18px;
-      font-weight: 600;
-      line-height: 1.35;
-      margin-bottom: 5px;
-    }
+.category{
+  color:#8f6d4d;
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:1.3px;
+  margin-bottom:8px;
+}
 
-    .product-size {
-      color: #888;
-      font-size: 13px;
-      margin-bottom: 14px;
-    }
+.product-name{
+  font-size:18px;
+  font-weight:600;
+  line-height:1.35;
+  margin-bottom:5px;
+}
 
-    .benefits {
-      list-style: none;
-      margin-bottom: 18px;
-      flex: 1;
-    }
+.product-size{
+  color:#888;
+  font-size:13px;
+  margin-bottom:14px;
+}
 
-    .benefits li {
-      color: #555;
-      font-size: 13px;
-      margin-bottom: 6px;
-      padding-left: 15px;
-      line-height: 1.45;
-      position: relative;
-    }
+.benefits{
+  list-style:none;
+  margin-bottom:18px;
+  flex:1;
+}
 
-    .benefits li::before {
-      content: "•";
-      position: absolute;
-      left: 0;
-      color: #8f6d4d;
-      font-weight: bold;
-    }
+.benefits li{
+  color:#555;
+  font-size:13px;
+  margin-bottom:6px;
+  padding-left:15px;
+  line-height:1.45;
+  position:relative;
+}
 
-    .price {
-      font-size: 22px;
-      font-weight: 700;
-      margin-bottom: 14px;
-    }
+.benefits li::before{
+  content:"•";
+  position:absolute;
+  left:0;
+  color:#8f6d4d;
+  font-weight:bold;
+}
 
-    .order-btn {
-      width: 100%;
-      border: none;
-      border-radius: 9px;
-      padding: 12px;
-      background: #222;
-      color: #fff;
-      font-size: 13px;
-      font-weight: 700;
-      cursor: pointer;
-    }
+.price{
+  font-size:22px;
+  font-weight:700;
+  margin-bottom:14px;
+}
 
-    .order-btn:hover {
-      background: #8f6d4d;
-    }
+.order-btn{
+  width:100%;
+  border:none;
+  border-radius:9px;
+  padding:12px;
+  background:#222;
+  color:#fff;
+  font-size:13px;
+  font-weight:700;
+  cursor:pointer;
+}
 
-    /* INSTAGRAM */
-    .instagram-section {
-      background: #fff;
-      border-top: 1px solid #e8e5df;
-      border-bottom: 1px solid #e8e5df;
-      text-align: center;
-      padding: 50px 20px;
-    }
+.order-btn:hover{
+  background:#8f6d4d;
+}
 
-    .instagram-section h2 {
-      font-size: 26px;
-      font-weight: 500;
-      margin-bottom: 10px;
-    }
+.loading{
+  grid-column:1/-1;
+  text-align:center;
+  padding:50px;
+  color:#777;
+}
 
-    .instagram-section p {
-      color: #777;
-      margin-bottom: 20px;
-    }
+.error{
+  grid-column:1/-1;
+  text-align:center;
+  padding:40px;
+  color:#b00020;
+}
 
-    .instagram-btn {
-      display: inline-block;
-      padding: 12px 24px;
-      border-radius: 9px;
-      background: #222;
-      color: #fff;
-      font-weight: 700;
-      font-size: 14px;
-    }
+.instagram-section{
+  background:#fff;
+  border-top:1px solid #e8e5df;
+  border-bottom:1px solid #e8e5df;
+  text-align:center;
+  padding:50px 20px;
+}
 
-    .instagram-btn:hover {
-      background: #8f6d4d;
-    }
+.instagram-section h2{
+  font-size:26px;
+  font-weight:500;
+  margin-bottom:10px;
+}
 
-    /* FOOTER */
-    footer {
-      background: #222;
-      color: #fff;
-      text-align: center;
-      padding: 30px 20px;
-    }
+.instagram-section p{
+  color:#777;
+  margin-bottom:20px;
+}
 
-    footer .footer-logo {
-      font-size: 22px;
-      font-weight: 700;
-      letter-spacing: 3px;
-      margin-bottom: 8px;
-    }
+.instagram-btn{
+  display:inline-block;
+  padding:12px 24px;
+  border-radius:9px;
+  background:#222;
+  color:#fff;
+  font-weight:700;
+  font-size:14px;
+}
 
-    footer p {
-      color: #bbb;
-      font-size: 13px;
-    }
+.instagram-btn:hover{
+  background:#8f6d4d;
+}
 
-    /* WHATSAPP */
-    .whatsapp-float {
-      position: fixed;
-      right: 20px;
-      bottom: 20px;
-      width: 58px;
-      height: 58px;
-      border-radius: 50%;
-      background: #25D366;
-      color: #fff;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 24px;
-      font-weight: bold;
-      z-index: 2000;
-      box-shadow: 0 5px 20px rgba(0,0,0,.2);
-    }
+footer{
+  background:#222;
+  color:#fff;
+  text-align:center;
+  padding:30px 20px;
+}
 
-    .whatsapp-float:hover {
-      transform: scale(1.05);
-    }
+footer .footer-logo{
+  font-size:22px;
+  font-weight:700;
+  letter-spacing:3px;
+  margin-bottom:8px;
+}
 
-    /* RESPONSIVE */
-    @media (max-width: 1000px) {
-      .products-grid {
-        grid-template-columns: repeat(3, 1fr);
-      }
-    }
+footer p{
+  color:#bbb;
+  font-size:13px;
+}
 
-    @media (max-width: 750px) {
-      .products-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 14px;
-      }
+.whatsapp-float{
+  position:fixed;
+  right:20px;
+  bottom:20px;
+  width:58px;
+  height:58px;
+  border-radius:50%;
+  background:#25D366;
+  color:#fff;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:24px;
+  font-weight:bold;
+  z-index:2000;
+  box-shadow:0 5px 20px rgba(0,0,0,.2);
+}
 
-      .product-content {
-        padding: 14px;
-      }
+@media(max-width:1000px){
+  .products-grid{
+    grid-template-columns:repeat(3,1fr);
+  }
+}
 
-      .product-name {
-        font-size: 16px;
-      }
+@media(max-width:750px){
+  .products-grid{
+    grid-template-columns:repeat(2,1fr);
+    gap:14px;
+  }
 
-      .price {
-        font-size: 20px;
-      }
-    }
+  .product-content{
+    padding:14px;
+  }
 
-    @media (max-width: 500px) {
-      .logo {
-        font-size: 22px;
-      }
+  .product-name{
+    font-size:16px;
+  }
 
-      nav {
-        gap: 10px;
-      }
+  .price{
+    font-size:20px;
+  }
+}
 
-      nav a {
-        font-size: 11px;
-      }
+@media(max-width:500px){
+  .logo{
+    font-size:22px;
+  }
 
-      .hero {
-        padding: 50px 15px 40px;
-      }
+  nav{
+    gap:10px;
+  }
 
-      .hero h1 {
-        font-size: 32px;
-      }
+  nav a{
+    font-size:11px;
+  }
 
-      .products-section {
-        padding-left: 10px;
-        padding-right: 10px;
-      }
+  .hero{
+    padding:50px 15px 40px;
+  }
 
-      .products-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
-      }
+  .hero h1{
+    font-size:32px;
+  }
 
-      .product-content {
-        padding: 11px;
-      }
+  .products-section{
+    padding-left:10px;
+    padding-right:10px;
+  }
 
-      .category {
-        font-size: 8px;
-      }
+  .products-grid{
+    grid-template-columns:repeat(2,1fr);
+    gap:10px;
+  }
 
-      .product-name {
-        font-size: 14px;
-      }
+  .product-content{
+    padding:11px;
+  }
 
-      .product-size {
-        font-size: 11px;
-      }
+  .category{
+    font-size:8px;
+  }
 
-      .benefits li {
-        font-size: 11px;
-      }
+  .product-name{
+    font-size:14px;
+  }
 
-      .price {
-        font-size: 18px;
-      }
+  .product-size{
+    font-size:11px;
+  }
 
-      .order-btn {
-        font-size: 11px;
-        padding: 10px 5px;
-      }
-    }
-  </style>
+  .benefits li{
+    font-size:11px;
+  }
+
+  .price{
+    font-size:18px;
+  }
+
+  .order-btn{
+    font-size:11px;
+    padding:10px 5px;
+  }
+}
+</style>
 </head>
 
 <body>
 
-  <!-- HEADER -->
-  <header>
-    <div class="header-inner">
+<header>
+  <div class="header-inner">
 
-      <div>
-        <div class="logo">SIMILYA</div>
-        <div class="tagline">SANTÉ • BEAUTÉ • BIEN-ÊTRE</div>
-      </div>
-
-      <nav>
-        <a href="#produits">Produits</a>
-
-        <a
-          href="https://www.instagram.com/similya_pro1/"
-          target="_blank">
-          Instagram
-        </a>
-      </nav>
-
-    </div>
-  </header>
-
-
-  <!-- HERO -->
-  <section class="hero">
-
-    <h1>Découvrez notre collection</h1>
-
-    <p>
-      Des produits sélectionnés pour prendre soin de votre beauté,
-      votre hygiène et votre bien-être au quotidien.
-    </p>
-
-  </section>
-
-
-  <!-- PRODUCTS -->
-  <section class="products-section" id="produits">
-
-    <div class="section-title">
-
-      <h2>Nos Produits</h2>
-
-      <p>
-        Découvrez nos produits et commandez facilement via WhatsApp.
-      </p>
-
+    <div>
+      <div class="logo">SIMILYA</div>
+      <div class="tagline">SANTÉ • BEAUTÉ • BIEN-ÊTRE</div>
     </div>
 
+    <nav>
+      <a href="#produits">Produits</a>
+      <a href="https://www.instagram.com/similya_pro1/" target="_blank">
+        Instagram
+      </a>
+    </nav>
 
-    <div class="products-grid">
+  </div>
+</header>
 
 
-      <!-- ================================================= -->
-      <!-- 1 — CRÈME SOLAIRE -->
-      <!-- IMAGE = product1.jpg -->
-      <!-- ================================================= -->
+<section class="hero">
 
-      <article class="product-card">
+  <h1>Découvrez notre collection</h1>
 
-        <img
-          class="product-image"
-          src="product1.jpg"
-          alt="Crème solaire SPF 50+"
-        >
+  <p>
+    Des produits sélectionnés pour prendre soin de votre santé,
+    votre beauté et votre bien-être au quotidien.
+  </p>
 
-        <div class="product-content">
+</section>
 
-          <div class="category">
-            SOLAIRE
-          </div>
 
-          <div class="product-name">
-            Crème solaire SPF 50+
-          </div>
+<section class="products-section" id="produits">
 
-          <div class="product-size">
-            50 ml
-          </div>
+  <div class="section-title">
+    <h2>Nos Produits</h2>
+    <p>Découvrez nos produits et commandez facilement via WhatsApp.</p>
+  </div>
 
-          <ul class="benefits">
-            <li>Protection UV large spectre</li>
-            <li>Hydrate la peau</li>
-            <li>Prévient le vieillissement</li>
-          </ul>
+  <div class="products-grid" id="productsGrid">
 
-          <div class="price">
-            190 DH
-          </div>
-
-          <button
-            class="order-btn"
-            onclick="orderProduct('Crème solaire SPF 50+', '190 DH')">
-            Commander sur WhatsApp
-          </button>
-
-        </div>
-
-      </article>
-
-
-      <!-- ================================================= -->
-      <!-- 2 — CRÈME DÉODORANTE -->
-      <!-- IMAGE = product2.jpg -->
-      <!-- ================================================= -->
-
-      <article class="product-card">
-
-        <img
-          class="product-image"
-          src="product2.jpg"
-          alt="Crème déodorante"
-        >
-
-        <div class="product-content">
-
-          <div class="category">
-            HYGIÈNE
-          </div>
-
-          <div class="product-name">
-            Crème déodorante
-          </div>
-
-          <div class="product-size">
-            50 ml
-          </div>
-
-          <ul class="benefits">
-            <li>Protège 24h</li>
-            <li>Neutralise les odeurs</li>
-            <li>Respecte la peau</li>
-          </ul>
-
-          <div class="price">
-            155 DH
-          </div>
-
-          <button
-            class="order-btn"
-            onclick="orderProduct('Crème déodorante', '155 DH')">
-            Commander sur WhatsApp
-          </button>
-
-        </div>
-
-      </article>
-
-
-      <!-- ================================================= -->
-      <!-- 3 — SÉRUM ANTI-ACNÉ -->
-      <!-- IMAGE = product3.jpg -->
-      <!-- ================================================= -->
-
-      <article class="product-card">
-
-        <img
-          class="product-image"
-          src="product3.jpg"
-          alt="Sérum anti-acné"
-        >
-
-        <div class="product-content">
-
-          <div class="category">
-            ACNÉ
-          </div>
-
-          <div class="product-name">
-            Sérum anti-acné
-          </div>
-
-          <div class="product-size">
-            30 ml
-          </div>
-
-          <ul class="benefits">
-            <li>Réduit les boutons</li>
-            <li>Purifie la peau</li>
-            <li>Régule le sébum</li>
-          </ul>
-
-          <div class="price">
-            185 DH
-          </div>
-
-          <button
-            class="order-btn"
-            onclick="orderProduct('Sérum anti-acné', '185 DH')">
-            Commander sur WhatsApp
-          </button>
-
-        </div>
-
-      </article>
-
-
-      <!-- ================================================= -->
-      <!-- 4 — HUILE CROISSANCE BARBE -->
-      <!-- IMAGE = product4.jpg -->
-      <!-- ================================================= -->
-
-      <article class="product-card">
-
-        <img
-          class="product-image"
-          src="product4.jpg"
-          alt="Huile croissance barbe"
-        >
-
-        <div class="product-content">
-
-          <div class="category">
-            BARBE
-          </div>
-
-          <div class="product-name">
-            Huile croissance barbe
-          </div>
-
-          <div class="product-size">
-            30 ml
-          </div>
-
-          <ul class="benefits">
-            <li>Stimule la pousse</li>
-            <li>Nourrit en profondeur</li>
-            <li>Adoucit et assouplit</li>
-          </ul>
-
-          <div class="price">
-            155 DH
-          </div>
-
-          <button
-            class="order-btn"
-            onclick="orderProduct('Huile croissance barbe', '155 DH')">
-            Commander sur WhatsApp
-          </button>
-
-        </div>
-
-      </article>
-
-
-      <!-- ================================================= -->
-      <!-- 5 — SÉRUM HYDRATANT CHEVEUX -->
-      <!-- IMAGE = product5.jpg -->
-      <!-- ================================================= -->
-
-      <article class="product-card">
-
-        <img
-          class="product-image"
-          src="product5.jpg"
-          alt="Sérum hydratant cheveux"
-        >
-
-        <div class="product-content">
-
-          <div class="category">
-            CHEVEUX
-          </div>
-
-          <div class="product-name">
-            Sérum hydratant cheveux
-          </div>
-
-          <div class="product-size">
-            50 ml
-          </div>
-
-          <ul class="benefits">
-            <li>Hydrate en profondeur</li>
-            <li>Renforce la fibre capillaire</li>
-            <li>Apporte brillance et douceur</li>
-          </ul>
-
-          <div class="price">
-            185 DH
-          </div>
-
-          <button
-            class="order-btn"
-            onclick="orderProduct('Sérum hydratant cheveux', '185 DH')">
-            Commander sur WhatsApp
-          </button>
-
-        </div>
-
-      </article>
-
-
-      <!-- ================================================= -->
-      <!-- 6 — SPRAY GENCIVES & HALEINE -->
-      <!-- IMAGE = product6.jpg -->
-      <!-- ================================================= -->
-
-      <article class="product-card">
-
-        <img
-          class="product-image"
-          src="product6.jpg"
-          alt="Spray gencives et haleine"
-        >
-
-        <div class="product-content">
-
-          <div class="category">
-            HYGIÈNE BUCCALE
-          </div>
-
-          <div class="product-name">
-            Spray gencives &amp; haleine
-          </div>
-
-          <div class="product-size">
-            20 ml
-          </div>
-
-          <ul class="benefits">
-            <li>Apaise les gencives</li>
-            <li>Combat la mauvaise haleine</li>
-            <li>Protège durablement</li>
-          </ul>
-
-          <div class="price">
-            155 DH
-          </div>
-
-          <button
-            class="order-btn"
-            onclick="orderProduct('Spray gencives & haleine', '155 DH')">
-            Commander sur WhatsApp
-          </button>
-
-        </div>
-
-      </article>
-
-
-      <!-- ================================================= -->
-      <!-- 7 — SHAMPOOING ANTI-POUX -->
-      <!-- IMAGE = product7.jpg -->
-      <!-- ================================================= -->
-
-      <article class="product-card">
-
-        <img
-          class="product-image"
-          src="product7.jpg"
-          alt="Shampooing anti-poux"
-        >
-
-        <div class="product-content">
-
-          <div class="category">
-            CUIR CHEVELU
-          </div>
-
-          <div class="product-name">
-            Shampooing anti-poux
-          </div>
-
-          <div class="product-size">
-            250 ml
-          </div>
-
-          <ul class="benefits">
-            <li>Élimine les poux</li>
-            <li>Protège le cuir chevelu</li>
-            <li>Apporte fraîcheur</li>
-          </ul>
-
-          <div class="price">
-            175 DH
-          </div>
-
-          <button
-            class="order-btn"
-            onclick="orderProduct('Shampooing anti-poux', '175 DH')">
-            Commander sur WhatsApp
-          </button>
-
-        </div>
-
-      </article>
-
-
-      <!-- ================================================= -->
-      <!-- 8 — SÉRUM ANTI-ACNÉ CORPS -->
-      <!-- IMAGE = product8.jpg -->
-      <!-- ================================================= -->
-
-      <article class="product-card">
-
-        <img
-          class="product-image"
-          src="product8.jpg"
-          alt="Sérum anti-acné corps"
-        >
-
-        <div class="product-content">
-
-          <div class="category">
-            CORPS
-          </div>
-
-          <div class="product-name">
-            Sérum anti-acné corps
-          </div>
-
-          <div class="product-size">
-            100 ml
-          </div>
-
-          <ul class="benefits">
-            <li>Réduit les imperfections</li>
-            <li>Purifie la peau</li>
-            <li>Apaise les irritations</li>
-          </ul>
-
-          <div class="price">
-            190 DH
-          </div>
-
-          <button
-            class="order-btn"
-            onclick="orderProduct('Sérum anti-acné corps', '190 DH')">
-            Commander sur WhatsApp
-          </button>
-
-        </div>
-
-      </article>
-
-
+    <div class="loading">
+      Chargement des produits...
     </div>
 
-  </section>
+  </div>
+
+</section>
 
 
-  <!-- INSTAGRAM -->
-  <section class="instagram-section">
+<section class="instagram-section">
 
-    <h2>Suivez SIMILYA</h2>
+  <h2>Suivez SIMILYA</h2>
 
-    <p>
-      Découvrez nos nouveautés et actualités sur Instagram.
-    </p>
+  <p>
+    Découvrez nos nouveautés et actualités sur Instagram.
+  </p>
 
-    <a
-      class="instagram-btn"
-      href="https://www.instagram.com/similya_pro1/"
-      target="_blank">
-      @similya_pro1
-    </a>
-
-  </section>
-
-
-  <!-- FOOTER -->
-  <footer>
-
-    <div class="footer-logo">
-      SIMILYA
-    </div>
-
-    <p>
-      SANTÉ • BEAUTÉ • BIEN-ÊTRE
-    </p>
-
-    <p style="margin-top:10px;">
-      © 2026 SIMILYA — Tous droits réservés
-    </p>
-
-  </footer>
-
-
-  <!-- WHATSAPP -->
   <a
-    class="whatsapp-float"
-    href="https://wa.me/212771849543"
+    class="instagram-btn"
+    href="https://www.instagram.com/similya_pro1/"
     target="_blank"
-    aria-label="WhatsApp">
-    ☎
+  >
+    @similya_pro1
   </a>
 
+</section>
 
-  <!-- JAVASCRIPT -->
-  <script>
 
-    function orderProduct(productName, price) {
+<footer>
 
-      const phone = "212771849543";
+  <div class="footer-logo">SIMILYA</div>
 
-      const message =
-        "Bonjour SIMILYA 👋\n\n" +
-        "Je souhaite commander :\n" +
-        "Produit : " + productName + "\n" +
-        "Prix : " + price + "\n\n" +
-        "Merci.";
+  <p>SANTÉ • BEAUTÉ • BIEN-ÊTRE</p>
 
-      const url =
-        "https://wa.me/" +
-        phone +
-        "?text=" +
-        encodeURIComponent(message);
+  <p style="margin-top:10px;">
+    © 2026 SIMILYA — Tous droits réservés
+  </p>
 
-      window.open(url, "_blank");
+</footer>
+
+
+<a
+  class="whatsapp-float"
+  href="https://wa.me/212771849543"
+  target="_blank"
+  aria-label="WhatsApp"
+>
+  ☎
+</a>
+
+
+<script>
+
+const SUPABASE_URL =
+  "https://kjrgjmcjpkoxnnccanip.supabase.co";
+
+const SUPABASE_KEY =
+  "sb_publishable_aHnsiRvjTjfOlVYfd6vS3w_VqFL0gKd";
+
+const supabaseClient =
+  window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+  );
+
+
+function orderProduct(productName, price){
+
+  const phone = "212771849543";
+
+  const message =
+    "Bonjour SIMILYA 👋\n\n" +
+    "Je souhaite commander :\n" +
+    "Produit : " + productName + "\n" +
+    "Prix : " + price + " DH\n\n" +
+    "Merci.";
+
+  const url =
+    "https://wa.me/" +
+    phone +
+    "?text=" +
+    encodeURIComponent(message);
+
+  window.open(url, "_blank");
+}
+
+
+function createProductCard(product){
+
+  const article =
+    document.createElement("article");
+
+  article.className = "product-card";
+
+  const image =
+    product.image_url ||
+    "https://via.placeholder.com/600x600?text=SIMILYA";
+
+  const benefits =
+    Array.isArray(product.benefits)
+      ? product.benefits
+      : [];
+
+  const benefitsHTML =
+    benefits
+      .map(
+        benefit =>
+          `<li>${escapeHTML(benefit)}</li>`
+      )
+      .join("");
+
+  const price =
+    Number(product.price)
+      .toLocaleString("fr-FR");
+
+  article.innerHTML = `
+
+    <img
+      class="product-image"
+      src="${escapeAttribute(image)}"
+      alt="${escapeAttribute(product.name)}"
+    >
+
+    <div class="product-content">
+
+      <div class="category">
+        ${escapeHTML(product.category || "")}
+      </div>
+
+      <div class="product-name">
+        ${escapeHTML(product.name)}
+      </div>
+
+      <div class="product-size">
+        ${escapeHTML(product.size || "")}
+      </div>
+
+      <ul class="benefits">
+        ${benefitsHTML}
+      </ul>
+
+      <div class="price">
+        ${price} DH
+      </div>
+
+      <button
+        class="order-btn"
+        type="button"
+      >
+        Commander sur WhatsApp
+      </button>
+
+    </div>
+  `;
+
+  article
+    .querySelector(".order-btn")
+    .addEventListener("click", () => {
+      orderProduct(product.name, price);
+    });
+
+  return article;
+}
+
+
+function escapeHTML(value){
+
+  return String(value ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+
+function escapeAttribute(value){
+
+  return escapeHTML(value);
+}
+
+
+async function loadProducts(){
+
+  const grid =
+    document.getElementById("productsGrid");
+
+  try{
+
+    const {
+      data,
+      error
+    } = await supabaseClient
+      .from("products")
+      .select("*")
+      .eq("active", true)
+      .order("id", { ascending:true });
+
+    if(error){
+      throw error;
     }
 
-  </script>
+    grid.innerHTML = "";
+
+    if(!data || data.length === 0){
+
+      grid.innerHTML = `
+        <div class="loading">
+          Aucun produit disponible pour le moment.
+        </div>
+      `;
+
+      return;
+    }
+
+    data.forEach(product => {
+
+      grid.appendChild(
+        createProductCard(product)
+      );
+
+    });
+
+  }catch(error){
+
+    console.error(error);
+
+    grid.innerHTML = `
+      <div class="error">
+        Impossible de charger les produits.
+        <br>
+        Veuillez réessayer plus tard.
+      </div>
+    `;
+  }
+}
+
+
+loadProducts();
+
+</script>
 
 </body>
 </html>
